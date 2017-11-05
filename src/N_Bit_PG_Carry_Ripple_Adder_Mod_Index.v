@@ -2,13 +2,13 @@ module n_bit_pg_carry_ripple //Top level module for N-bit Carry Ripple Adder (Se
 
   #(parameter N = 32) // The parameter "N" may be edited to change bit count.
 
-   (input logic [N:1] A, B, //Two N-bit input words.
+   (input logic [N-1:0] A, B, //Two N-bit input words.
     input logic Cin, //1-bit carry in.
-    output logic [N:1] S, //N-bit sum.
+    output logic [N-1:0] S, //N-bit sum.
     output logic Cout); //1-bit carry out.
 
-  wire [N:1] P, G; //Wires for the N bitwise PG signals. 
-  wire [(N-1):1] C; //Wires for the N-1 carry signals.
+  wire [N-1:0] P, G; //Wires for the N bitwise PG signals. 
+  wire [(N-2):0] C; //Wires for the N-1 carry signals.
 
     N_Bit_Bitwise_PG BPG1 (P, G, A, B); //Instantiate bitwise PG logic, Eq. (11.5).
     N_Bit_Group_PG GPG1 (C, G[(N-1):1], P[(N-1):1], Cin); //Instantiate group PG logic, Eq. (11.10).
