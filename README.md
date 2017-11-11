@@ -1,3 +1,3 @@
 # This is the project repo for ECE-533, VLSI!
 
-![Workflow Diagram](https://github.com/PhonePong/VLSI/tree/figures/workflow.png)
+![Workflow Diagram](figures/workflow.png)
