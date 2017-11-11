@@ -14,11 +14,18 @@
 ***
 ### Valency-2 Gray Cell
 
-Schematic                                                            | Test Waveform
-:-------------------------------------------------------------------:|:------------------------------------------------------------------------:
-![Valency-2 Gray Cell Schematic](schematics/v2_grayC_screenshot.png) | ![Valency-2 Gray Cell Test Waveform](waves/v2_grayC_wave_screenshot.png)
+![Valency-2 Gray Cell Schematic](schematics/v2_grayC_screenshot.png)
+![Valency-2 Gray Cell Test Waveform](waves/v2_grayC_wave_screenshot.png)
 
 ***
 ### Valency-3 Gray Cell
 
-![Valency-3 Gray Cell Schematic](schematics/v3_grayC_screenshot.png) ![Valency-3 Gray Cell Test Waveform](waves/v3_grayC_wave_screenshot.png)
+![Valency-3 Gray Cell Schematic](schematics/v3_grayC_screenshot.png) 
+![Valency-3 Gray Cell Test Waveform](waves/v3_grayC_wave_screenshot.png)
+
+<!--- One way to put images side by side:
+
+Schematic                                                            | Test Waveform
+:-------------------------------------------------------------------:|:------------------------------------------------------------------------:
+![Valency-2 Gray Cell Schematic](schematics/v2_grayC_screenshot.png) | ![Valency-2 Gray Cell Test Waveform](waves/v2_grayC_wave_screenshot.png)
+-->
