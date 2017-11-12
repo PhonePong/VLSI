@@ -2,13 +2,13 @@ module n_bit_pg_carry_ripple //Top level module for N-bit Carry Ripple Adder (Se
 
   #(parameter N = 32) // The parameter "N" may be edited to change bit count.
 
-   (input logic [N-1:0] A, B, //Two N-bit input words.
+   (input logic [N:1] A, B, //Two N-bit input words.
     input logic Cin, //1-bit carry in.
-    output logic [N-1:0] S, //N-bit sum.
+    output logic [N:1] S, //N-bit sum.
     output logic Cout); //1-bit carry out.
 
-  wire [N-1:0] P, G; //Wires for the N bitwise PG signals. 
-  wire [(N-2):0] C; //Wires for the N-1 carry signals.
+  wire [N:1] P, G; //Wires for the N bitwise PG signals. 
+  wire [(N-1):1] C; //Wires for the N-1 carry signals.
 
     N_Bit_Bitwise_PG BPG1 (P, G, A, B); //Instantiate bitwise PG logic, Eq. (11.5).
     N_Bit_Group_PG GPG1 (C, G[(N-1):1], P[(N-1):1], Cin); //Instantiate group PG logic, Eq. (11.10).
@@ -51,13 +51,15 @@ module N_Bit_Group_PG //This module realizes the group PG logic of Eq (11.10) an
     v2_gray_cell Stage1G1 (G[1],Cin,P[1],GG[1]); //only one for this stage
 	
 	v2_gray_cell Stage2G1 (Int1G[2],Cin,Int1P[2],GG[2]); //only 2, for loop would have 1 term
-	v2_gray_cell Stage2G1 (Int1G[3],GG[1],Int1P[3],GG[3]);
+	v2_gray_cell Stage2G2 (Int1G[3],GG[1],Int1P[3],GG[3]);
 	
 	v2_gray_cell Stage3G1 (Int2G[4],Cin,Int2P[4],GG[4]); //4, for loop has 3 terms.
 	
 	v2_gray_cell Stage4G1 (Int3G[8],Cin,Int3P[8],GG[8]); //8, for loop has 7 terms.
 	
-	v2_gray_cell Stage4G1 (Int4G[16],Cin,Int4P[16],GG[16]); //16, for loop has 15 terms.
+	v2_gray_cell Stage5G1 (Int4G[16],Cin,Int4P[16],GG[16]); //16, for loop has 15 terms.
+	
+	genvar i;
 	
 	generate 
 	
@@ -69,7 +71,7 @@ module N_Bit_Group_PG //This module realizes the group PG logic of Eq (11.10) an
 		v2_gray_cell Stage4Gs (Int3G[i],GG[i-8],Int3P[i],GG[i]); //fourth stage grey cells
 	end
 	
-	for (i=16; i<=32; i=i+1) begin : KoggGreys5 //Loop saves having to manually assign all ins and outs of many many grey cells.
+	for (i=17; i<=31; i=i+1) begin : KoggGreys5 //Loop saves having to manually assign all ins and outs of many many grey cells.
 		v2_gray_cell Stage4Gs (Int4G[i],GG[i-16],Int4P[i],GG[i]); //fifth stage grey cells
 	end
 	
