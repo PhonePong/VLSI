@@ -1,4 +1,19 @@
-module n_bit_pg_Kogge_Stone //Top level module for N-bit Carry Ripple Adder (See Fig. 11.14). //note: modified for Kogg-Stone, NOT expandable.
+module 2s_complement //2s complementer toplevel, uses adder as part.
+
+#(parameter N = 32)
+
+	(input logic [N-1:0] Xin
+	output logic [N-1:0] Y)
+	
+	wire [N-1:0] NotX
+	
+	assign NotX = not Xin;
+	
+	n_bit_Kogge_Stone A (NotX, 32'd0, 1'b1, Y, Z);
+
+endmodule 
+
+module n_bit_Kogge_Stone //Top level module for N-bit Carry Ripple Adder (See Fig. 11.14). //note: modified for Kogg-Stone, NOT expandable.
 
   #(parameter N = 32) // The parameter "N" may be edited to change bit count.
 
@@ -135,17 +150,16 @@ module test
 
   #(parameter N = 32); // The parameter "N" may be edited to change bit count.
 
-  logic [N:1] A, B, S;
-  logic Cin, Cout;
+  logic [N:1] X1, Y;
 
-  n_bit_pg_carry_ripple A1 (A,B,Cin,S,Cout);
+  2s_complement neg (X1,Y);
 
   initial
     begin
-     A = 0; B = 0; Cin = 0;
-     #2 A   = 64'd25;
-     #2 B   = 64'd75;
-     #2 Cin = 1'b1;
+     X1 = 32'd10
+     #2 X1 = 32'd123
+     #2 X1 = 32'd35
+     #2 X1 = 32'd-110
      #6 $finish;
     end
 
