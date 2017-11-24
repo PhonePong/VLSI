@@ -1,4 +1,4 @@
-module n_bit_pg_Kogge_Stone//note: modified for Kogg-Stone, NOT expandable. - ezpz made it a subtractor
+module n_bit_pg_Kogge_Stone_S//note: modified for Kogg-Stone, NOT expandable. - ezpz made it a subtractor
 
   #(parameter N = 32) // The parameter "N" may be edited to change bit count.
 
@@ -140,7 +140,7 @@ module test
   logic [N:1] A, B, S;
   logic Cin, Cout;
 
-  n_bit_pg_carry_ripple A1 (A,B,Cin,S,Cout);
+  n_bit_pg_Kogge_Stone_S S1 (A,B,Cin,S,Cout);
 
   initial
     begin

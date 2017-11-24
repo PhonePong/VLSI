@@ -1,4 +1,4 @@
-module n_bit_pg_Kogge_Stone //Top level module for N-bit Carry Ripple Adder (See Fig. 11.14). //note: modified for Kogg-Stone, NOT expandable.
+module n_bit_pg_Kogge_Stone_A //Top level module for N-bit Carry Ripple Adder (See Fig. 11.14). //note: modified for Kogg-Stone, NOT expandable.
 
   #(parameter N = 32) // The parameter "N" may be edited to change bit count.
 
@@ -138,7 +138,7 @@ module test
   logic [N:1] A, B, S;
   logic Cin, Cout;
 
-  n_bit_pg_carry_ripple A1 (A,B,Cin,S,Cout);
+  n_bit_pg_Kogge_Stone_A A1 (A,B,Cin,S,Cout);
 
   initial
     begin
