@@ -18,7 +18,7 @@ endmodule
 
 module N_Bit_Bitwise_PG //This module realizes the bitwise PG logic of Eq (11.5) and FIG 11.12.
 
-  #(parameter N = 32) // The parameter "N" may be edited to change bit count.
+  #(parameter N = 64) // The parameter "N" may be edited to change bit count.
 
    (output logic [N:1] P, G, //N-bit Propagate and Generate signals.
     input logic [N:1] A, B); //Two N-bit input words.
@@ -30,7 +30,7 @@ endmodule
 
 module N_Bit_Group_PG //This module realizes the group PG logic of Eq (11.10) and FIG 11.14.
 
-  #(parameter N = 32) // The parameter "N" may be edited to change bit count.
+  #(parameter N = 64) // The parameter "N" may be edited to change bit count.
    
    (output logic [(N-1):1] GG, //N-1 group generate signals that are output to sum logic.
     input logic [(N-1):1] G, P, //PG inputs from bitwise PG logic.
@@ -48,7 +48,7 @@ endmodule
 
 module N_Bit_Sum_Logic //This module realizes the sum logic of Eq. (11.7) and FIG 11.14.
 
-  #(parameter N = 32) // The parameter "N" may be edited to change bit count.
+  #(parameter N = 64) // The parameter "N" may be edited to change bit count.
 
    (output logic Cout, //1-bit carry out.
     output logic [N:1] S, //N-bit sum.
@@ -64,7 +64,7 @@ endmodule
 
 module test
 
-  #(parameter N = 32); // The parameter "N" may be edited to change bit count.
+  #(parameter N = 64); // The parameter "N" may be edited to change bit count.
 
   logic [N:1] A, B, S;
   logic Cin, Cout;
