@@ -28,7 +28,7 @@
 
 Screenshot                                                           | Book 
 :-------------------------------------------------------------------:|:------------------------------------------------------------------------:
-![Radix-4 Booth-Encoder Schematic](schematics/32bit_booth_select_screenshot.png) | ![Radix-4 Booth-Encoder Book Schematic](schematics/rad4_booth_encode_schema(book).png)
+![Radix-4 Booth-Encoder Schematic](schematics/rad4_booth_encode_screenshot.png) | ![Radix-4 Booth-Encoder Book Schematic](schematics/rad4_booth_encode_schema(book).png)
 
 ![Radix-4 Booth-Encoder Test Waveform](waves/rad4_booth_encoder_wave_screenshot.png)
 
