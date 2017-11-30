@@ -23,6 +23,25 @@
 ![Valency-3 Gray Cell Schematic](schematics/v3_grayC_screenshot.png) 
 ![Valency-3 Gray Cell Test Waveform](waves/v3_grayC_wave_screenshot.png)
 
+***
+### Radix-4 Booth-Encoder 
+
+Screenshot                                                           | Book 
+:-------------------------------------------------------------------:|:------------------------------------------------------------------------:
+![Radix-4 Booth-Encoder Schematic](schematics/32bit_booth_select_screenshot.png) | ![Radix-4 Booth-Encoder Book Schematic](schematics/rad4_booth_encode_schema(book).png)
+
+![Radix-4 Booth-Encoder Test Waveform](waves/rad4_booth_encoder_wave_screenshot.png)
+
+***
+### Radix-4 Booth-Select 
+
+Screenshot                                                           | Book 
+:-------------------------------------------------------------------:|:------------------------------------------------------------------------:
+![Radix-4 Booth-Select Schematic](schematics/32bit_booth_select_screenshot.png) | ![Radix-4 Booth-Select Book Schematic](schematics/32bit_booth_select_schema(book).png)
+![Radix-4 Booth-Select Waveform](waves/32bit_booth_selector_wave_screenshot.png) | ![Radix-4 Booth-Select Book Table](waves/rad4_booth_table.png)
+
+
+
 <!--- This is a comment using standard html tags!
 
 One way to put images side by side is to form a table:
