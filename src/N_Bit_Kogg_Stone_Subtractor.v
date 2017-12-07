@@ -2,20 +2,23 @@ module n_bit_pg_Kogge_Stone_S//note: modified for Kogg-Stone, NOT expandable. - 
 
   #(parameter N = 32) // The parameter "N" may be edited to change bit count.
 
-   (input logic [N:1] A, B, //Two N-bit input words. A-B No carry in.
+   (input logic [N:1] A, B, //Two N-bit input words.
     output logic [N:1] S, //N-bit sum.
-    output logic Cout,
-    output logic [N:1] Monitor); //1-bit carry out.
+    output logic Cout); //1-bit carry out.
 
+	
+	wire Cin;
+	assign Cin = 1'b1;
+	wire [N:1] notb;
+	assign notb = ~B;
+	
   wire [N:1] P, G; //Wires for the N bitwise PG signals. 
-  wire [(N-1):1] C; //Wires for the N-1 carry signals.
-  wire [N:1] notB;
+  wire [(N):1] C; //Wires for the N-1 carry signals.
+	wire CP;
   
-  assign notB = ~B;
-  assign Monitor = notB;
   
-    N_Bit_Bitwise_PG BPG1 (P, G, A, notB); //Instantiate bitwise PG logic, Eq. (11.5).
-    N_Bit_Group_PG GPG1 (C, G[(N-1):1], P[(N-1):1], 1); //Instantiate group PG logic, Eq. (11.10).
+    N_Bit_Bitwise_PG BPG1 (P, G, A, notb); //Instantiate bitwise PG logic, Eq. (11.5).
+    N_Bit_Group_PG GPG1 (C, CP, G[(N-1):1], P[(N-1):1], Cin); //Instantiate group PG logic, Eq. (11.10).
     N_Bit_Sum_Logic SL1 (Cout, S, G[N], {C,Cin}, P); //Instantiate sum logic, Eqs. (11.7) and (11.11).
 
 endmodule
@@ -37,8 +40,11 @@ module N_Bit_Group_PG //This module realizes the group PG logic of Eq (11.10) an
   #(parameter N = 32) // The parameter "N" may be edited to change bit count.
    
    (output logic [(N):1] GG, //N-1 group generate signals that are output to sum logic.
-    input logic [(N):1] G, P, //PG inputs from bitwise PG logic.
+   output logic CP,
+    input logic [(N-1):1] G, P, //PG inputs from bitwise PG logic.
     input logic Cin); //1-bit carry in.
+
+	wire GplusC[(N-1):0];
 	
 	wire Int1G[(N):2];
 	wire Int2G[(N):4];
@@ -73,7 +79,7 @@ module N_Bit_Group_PG //This module realizes the group PG logic of Eq (11.10) an
 		v2_gray_cell Stage4Gs (Int3G[i],GG[i-8],Int3P[i],GG[i]); //fourth stage grey cells
 	end
 	
-	for (i=17; i<=32; i=i+1) begin : KoggGreys5 //Loop saves having to manually assign all ins and outs of many many grey cells.
+	for (i=17; i<=31; i=i+1) begin : KoggGreys5 //Loop saves having to manually assign all ins and outs of many many grey cells.
 		v2_gray_cell Stage4Gs (Int4G[i],GG[i-16],Int4P[i],GG[i]); //fifth stage grey cells
 	end
 	
@@ -82,19 +88,24 @@ module N_Bit_Group_PG //This module realizes the group PG logic of Eq (11.10) an
 	end
 	
 	for (i=4; i<=(N); i=i+1) begin : KoggInts2
-		v2_black_cell Stage2Bs (Int1G[i],Int1G[i-1],Int1P[i],Int1P[i-1],Int2G[i],Int2P[i]); //second stage blacks
+		v2_black_cell Stage2Bs (Int1G[i],Int1G[i-2],Int1P[i],Int1P[i-2],Int2G[i],Int2P[i]); //second stage blacks
 	end
 	
 	for (i=8; i<=(N); i=i+1) begin : KoggInts3
-		v2_black_cell Stage3Bs (Int2G[i],Int2G[i-1],Int2P[i],Int2P[i-1],Int3G[i],Int3P[i]); //third stage blacks
+		v2_black_cell Stage3Bs (Int2G[i],Int2G[i-4],Int2P[i],Int2P[i-4],Int3G[i],Int3P[i]); //third stage blacks
 	end
 	
 	for (i=16; i<=(N); i=i+1) begin : KoggInts4
-		v2_black_cell Stage4Bs (Int3G[i],Int3G[i-1],Int3P[i],Int3P[i-1],Int4G[i],Int4P[i]); // fourth stage blacks
+		v2_black_cell Stage4Bs (Int3G[i],Int3G[i-8],Int3P[i],Int3P[i-8],Int4G[i],Int4P[i]); // fourth stage blacks
 	end
 	
 	endgenerate
 	
+	wire carryG;
+	
+	v2_black_cell extra (Int4G[32], Int4G[(32-16)],carryG,CP);
+	
+	assign GG[N] = carryG;
 	
 endmodule
 
@@ -103,8 +114,8 @@ module N_Bit_Sum_Logic //This module realizes the sum logic of Eq. (11.7) and FI
   #(parameter N = 32) // The parameter "N" may be edited to change bit count.
 
    (output logic Cout, //1-bit carry out.
-    output logic [N:1] S, //N-bit difference.
-    input logic GN, //Most significant group generate bit.
+    output logic [N:1] S, //N-bit sum.
+    input logic GN, //Most significant bitwise generate bit.
     input logic [(N-1):0] C, //The carry signals from the group PG logic are also the group gernerate signals
                              //(see pg. 437).
     input logic [N:1] P); //P inputs from bitwise PG logic.
@@ -133,16 +144,14 @@ module v2_black_cell
 	assign pOut = p1 & p2;
 endmodule
 
-
-
 module test
 
   #(parameter N = 32); // The parameter "N" may be edited to change bit count.
 
-  logic [N:1] A, B, S, monitor;
+  logic [N:1] A, B, S;
   logic  Cout;
 
-  n_bit_pg_Kogge_Stone_S S1 (A,B,S,Cout,monitor);
+  n_bit_pg_Kogge_Stone_S S1 (A,B,S,Cout);
 
   initial
     begin
@@ -150,7 +159,6 @@ module test
      #2 A   = 32'd25;
       $display("%0d",S);
       $display("%0d",Cout);
-      $display("%0d",monitor);
      #2 B   = 32'd75;
       $display("%0d",S);
       $display("%0d",Cout);
@@ -165,4 +173,3 @@ module test
     end
 
 endmodule
-

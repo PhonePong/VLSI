@@ -77,6 +77,9 @@ module test
      #2 A   = 64'd25;
      #2 B   = 64'd75;
      #2 Cin = 1'b1;
+	 #2 A   = 64'd25;
+     #2 B   = 64'd75;
+     #2 Cin = 1'b1;
      #6 $finish;
     end
 
