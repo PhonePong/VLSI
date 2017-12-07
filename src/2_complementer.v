@@ -1,5 +1,19 @@
-// Code your design here
-module n_bit_pg_Kogge_Stone_A //Top level module for N-bit Carry Ripple Adder (See Fig. 11.14). //note: modified for Kogg-Stone, NOT expandable.
+module twos_complement //2s complementer toplevel, uses adder as part.
+
+#(parameter N = 32)
+
+	(input logic [N-1:0] Xin,
+	output logic [N-1:0] Y)
+	
+	wire [N-1:0] NotX
+	
+	assign NotX = not Xin;
+	
+	n_bit_Kogge_Stone A (NotX, 32'd0, 1'b1, Y, Z);
+
+endmodule 
+
+module n_bit_Kogge_Stone //Top level module for N-bit Carry Ripple Adder (See Fig. 11.14). //note: modified for Kogg-Stone, NOT expandable.
 
   #(parameter N = 32) // The parameter "N" may be edited to change bit count.
 
@@ -33,19 +47,21 @@ module N_Bit_Group_PG //This module realizes the group PG logic of Eq (11.10) an
 
   #(parameter N = 32) // The parameter "N" may be edited to change bit count.
    
-   (output logic [(N):1] GG, //N-1 group generate signals that are output to sum logic.
-    input logic [(N):1] G, P, //PG inputs from bitwise PG logic.
+   (output logic [(N-1):1] GG, //N-1 group generate signals that are output to sum logic.
+    input logic [(N-1):1] G, P, //PG inputs from bitwise PG logic.
     input logic Cin); //1-bit carry in.
+
+	wire GplusC[(N-1):0];
 	
-	wire Int1G[(N):2];
-	wire Int2G[(N):4];
-	wire Int3G[(N):8];
-	wire Int4G[(N):16];
+	wire Int1G[(N-1):2];
+	wire Int2G[(N-1):4];
+	wire Int3G[(N-1):8];
+	wire Int4G[(N-1):16];
 	
-	wire Int1P[(N):2];
-	wire Int2P[(N):4];
-	wire Int3P[(N):8];
-	wire Int4P[(N):16];
+	wire Int1P[(N-1):2];
+	wire Int2P[(N-1):4];
+	wire Int3P[(N-1):8];
+	wire Int4P[(N-1):16];
      
     v2_gray_cell Stage1G1 (G[1],Cin,P[1],GG[1]); //only one for this stage
 	
@@ -70,23 +86,23 @@ module N_Bit_Group_PG //This module realizes the group PG logic of Eq (11.10) an
 		v2_gray_cell Stage4Gs (Int3G[i],GG[i-8],Int3P[i],GG[i]); //fourth stage grey cells
 	end
 	
-	for (i=17; i<=32; i=i+1) begin : KoggGreys5 //Loop saves having to manually assign all ins and outs of many many grey cells.
-		v2_gray_cell Stage5Gs (Int4G[i],GG[i-16],Int4P[i],GG[i]); //fifth stage grey cells
+	for (i=17; i<=31; i=i+1) begin : KoggGreys5 //Loop saves having to manually assign all ins and outs of many many grey cells.
+		v2_gray_cell Stage4Gs (Int4G[i],GG[i-16],Int4P[i],GG[i]); //fifth stage grey cells
 	end
 	
-	for (i=2; i<=(N); i=i+1) begin : KoggInts1 //Loop saves having to manually assign all ins and outs of many many black cells.
+	for (i=2; i<=(N-1); i=i+1) begin : KoggInts1 //Loop saves having to manually assign all ins and outs of many many black cells.
 		v2_black_cell Stage1Bs (G[i],G[i-1],P[i],P[i-1],Int1G[i],Int1P[i]); //first stage black cells
 	end
 	
-	for (i=4; i<=(N); i=i+1) begin : KoggInts2
+	for (i=4; i<=(N-1); i=i+1) begin : KoggInts2
 		v2_black_cell Stage2Bs (Int1G[i],Int1G[i-1],Int1P[i],Int1P[i-1],Int2G[i],Int2P[i]); //second stage blacks
 	end
 	
-	for (i=8; i<=(N); i=i+1) begin : KoggInts3
+	for (i=8; i<=(N-1); i=i+1) begin : KoggInts3
 		v2_black_cell Stage3Bs (Int2G[i],Int2G[i-1],Int2P[i],Int2P[i-1],Int3G[i],Int3P[i]); //third stage blacks
 	end
 	
-	for (i=16; i<=(N); i=i+1) begin : KoggInts4
+	for (i=16; i<=(N-1); i=i+1) begin : KoggInts4
 		v2_black_cell Stage4Bs (Int3G[i],Int3G[i-1],Int3P[i],Int3P[i-1],Int4G[i],Int4P[i]); // fourth stage blacks
 	end
 	
@@ -134,35 +150,17 @@ module test
 
   #(parameter N = 32); // The parameter "N" may be edited to change bit count.
 
-  logic [N:1] A, B, S;
-  logic Cin, Cout;
+  logic [N:1] X1, Y;
 
-  n_bit_pg_Kogge_Stone_A A1 (A,B,Cin,S,Cout);
+  twos_complement neg (X1,Y);
 
   initial
     begin
-     A = 0; B = 0; Cin = 0;
-     #2 A   = 32'd25;
-      $display("%0d",S);
-      $display("%0d",Cout);
-     #2 B   = 32'd75;
-      $display("%0d",S);
-      $display("%0d",Cout);
-     #2 Cin = 1'b1;
-      $display("%0d",S);
-      $display("%0d",Cout);
-     #2 A   = 32'hFFFFFFFF;
-      	B   = 32'd0;
-      $display("%0d",S);
-      $display("%0d",Cout);
-     #2 B   = 32'hFFFFFFFF;
-      $display("%0d",S);
-      $display("%0d",Cout);
-     #2 Cin = 1'b1;
-      $display("%0d",S);
-      $display("%0d",Cout);
+     X1 = 32'd10
+     #2 X1 = 32'd123
+     #2 X1 = 32'd35
+     #2 X1 = 32'd-110
      #6 $finish;
     end
 
 endmodule
-
