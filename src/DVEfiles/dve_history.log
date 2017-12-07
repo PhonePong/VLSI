@@ -1,0 +1,88 @@
+# Preference setting overrides
+gui_create_pref_key -category {Globals} -key {load_detail_for_funcov} -value_type {bool} -value {false}
+gui_create_pref_category -category {schem_obj_name}
+gui_create_pref_key -category {schem_obj_name} -key {show_cell_and_pin_with_symbol_name} -value_type {bool} -value {false}
+gui_create_pref_key -category {schem_pin_hc} -key {textExtFont} -value_type {string} -value {Helvetica,10,-1,5,50,0,0,0,0,0}
+
+# State setting overrides
+gui_state_default_create -off -ini
+gui_set_state_value -category Globals -key recent_sessions -value {{gui_load_session -ignore_errors -file /home/jhazel/ASIC_Design/src/ctest.inter.vpd.tcl -ignore_errors} {gui_load_session -ignore_errors -file /home/jhazel/ASIC_Design/src/ctest.inter.vpd.tcl} {gui_load_session -ignore_errors -file /home/jhazel/ASIC_Design/src/session.inter.vpd.tcl -ignore_errors} {gui_load_session -ignore_errors -file /home/jhazel/ASIC_Design/src/session.inter.vpd.tcl} {gui_load_session -ignore_errors -file /home/jhazel/ASIC_Design/src/DVEfiles//crash_12.06-23.41/dve_session12.06-23.41.tcl}}
+gui_set_state_value -category Layout -key child_console_size_x -value 1279
+gui_set_state_value -category Layout -key child_console_size_y -value 300
+gui_set_state_value -category Layout -key child_data_size_x -value 105
+gui_set_state_value -category Layout -key child_data_size_y -value 517
+gui_set_state_value -category Layout -key child_driver_size_x -value 538
+gui_set_state_value -category Layout -key child_driver_size_y -value 310
+gui_set_state_value -category Layout -key child_hier_col3 -value {-1}
+gui_set_state_value -category Layout -key child_hier_colpd -value 0
+gui_set_state_value -category Layout -key child_hier_size_x -value 105
+gui_set_state_value -category Layout -key child_hier_size_y -value 517
+gui_set_state_value -category Layout -key child_list_down -value 165
+gui_set_state_value -category Layout -key child_list_right -value 442
+gui_set_state_value -category Layout -key child_schematic_docknewline -value false
+gui_set_state_value -category Layout -key child_schematic_pos_x -value {-2}
+gui_set_state_value -category Layout -key child_schematic_pos_y -value {-15}
+gui_set_state_value -category Layout -key child_schematic_size_x -value 1072
+gui_set_state_value -category Layout -key child_schematic_size_y -value 512
+gui_set_state_value -category Layout -key child_source_docknewline -value false
+gui_set_state_value -category Layout -key child_source_pos_x -value {-2}
+gui_set_state_value -category Layout -key child_source_pos_y -value {-15}
+gui_set_state_value -category Layout -key child_source_size_x -value 1072
+gui_set_state_value -category Layout -key child_source_size_y -value 512
+gui_set_state_value -category Layout -key child_watch_size_x -value 979
+gui_set_state_value -category Layout -key child_watch_size_y -value 310
+gui_set_state_value -category Layout -key child_wave_colname -value 164
+gui_set_state_value -category Layout -key child_wave_colvalue -value 163
+gui_set_state_value -category Layout -key child_wave_left -value 331
+gui_set_state_value -category Layout -key child_wave_right -value 807
+gui_set_state_value -category Layout -key main_pos_x -value 1
+gui_set_state_value -category Layout -key main_pos_y -value 38
+gui_set_state_value -category Layout -key main_size_x -value 1280
+gui_set_state_value -category Layout -key main_size_y -value 962
+gui_set_state_value -category Layout -key stand_list_child_docknewline -value false
+gui_set_state_value -category Layout -key stand_list_child_pos_x -value {-2}
+gui_set_state_value -category Layout -key stand_list_child_pos_y -value {-15}
+gui_set_state_value -category Layout -key stand_list_child_size_x -value 602
+gui_set_state_value -category Layout -key stand_list_child_size_y -value 310
+gui_set_state_value -category Layout -key stand_list_top_pos_y -value 139
+gui_set_state_value -category Layout -key stand_list_top_size_x -value 1097
+gui_set_state_value -category Layout -key stand_list_top_size_y -value 636
+gui_set_state_value -category Layout -key stand_wave_child_docknewline -value false
+gui_set_state_value -category Layout -key stand_wave_child_pos_x -value {-2}
+gui_set_state_value -category Layout -key stand_wave_child_pos_y -value {-15}
+gui_set_state_value -category Layout -key stand_wave_child_size_x -value 1148
+gui_set_state_value -category Layout -key stand_wave_child_size_y -value 725
+gui_set_state_value -category Layout -key stand_wave_top_pos_x -value 60
+gui_set_state_value -category Layout -key stand_wave_top_pos_y -value 66
+gui_set_state_value -category Layout -key stand_wave_top_size_x -value 1203
+gui_set_state_value -category Layout -key stand_wave_top_size_y -value 929
+gui_create_state_key -category FindDialog -key m_pMatchCase -value_type bool -value false
+gui_create_state_key -category FindDialog -key m_pMatchWord -value_type bool -value false
+gui_create_state_key -category FindDialog -key m_pUseCombo -value_type string -value {}
+gui_create_state_key -category FindDialog -key m_pWrapAround -value_type bool -value true
+gui_create_state_key -category SearchDialog -key MatchCase -value_type bool -value false
+gui_create_state_key -category SearchDialog -key MatchWord -value_type bool -value true
+gui_create_state_key -category SearchDialog -key SearchMode -value_type string -value Wildcards
+gui_create_state_key -category SearchDialog -key UseCombo -value_type bool -value true
+gui_state_default_create -off
+
+# Begin command logging
+gui_sim_run Ucli -exe simv -args {-ucligui  } -dir .
+gui_open_window Wave
+gui_list_add -id Wave.1 -from Source.1 { test } -insertionbar
+gui_wv_zoom_timerange -id  Wave.1 0 294
+gui_sim_continue  
+gui_zoom -window Wave.1 -full
+gui_list_select -id Wave.1 -selected  { {test.S[32:1]}   }
+gui_list_select -id Wave.1 -selected  { test.Cout  {test.A[32:1]}  {test.B[32:1]}  {test.N[31:0]}  {test.S[32:1]}   }
+gui_list_select -id Wave.1 -selected  { {test.N[31:0]}  {test.S[32:1]}  {test.B[32:1]}   }
+gui_list_set_selected_property -id Wave.1 -radix decimal
+gui_list_select -id Wave.1 -selected  { {test.A[32:1]}   }
+gui_list_set_selected_property -id Wave.1 -radix decimal
+gui_list_select -id Wave.1 -selected  { {test.S[32:1]}   }
+gui_list_select -id Wave.1 -selected  { {test.A[32:1]}  {test.B[32:1]}  {test.N[31:0]}  {test.S[32:1]}   }
+gui_list_set_selected_property -id Wave.1 -radix twosComplement
+gui_marker_move -id  Wave.1 C1 7
+gui_list_select -id Wave.1 -selected  {  }
+gui_marker_select -id  Wave.1 { C1 }
+gui_marker_move -id  Wave.1 C1 13

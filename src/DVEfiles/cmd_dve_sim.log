@@ -1,0 +1,32 @@
+set ucliGUI::state
+set ucliGUI::state
+ucliCore::getToolPID
+synopsys::env hasTB
+trigger_hier_stack_context_switch 0
+synUtils::setDVEInitPhase 1
+synopsys::dump -type VPD -file /home/jhazel/ASIC_Design/src/inter.vpd -locking
+synopsys::dump -autoflush on -fid VPD0
+set ::dve_fid VPD0
+synUtils::setDVEInitPhase 0
+ucliCore::getToolPID
+synUtils::sendTool -active _icl_setToolSocket /tmp/smlnpeIig7j
+synUtils::sendTool -active {_icl_start_rpc -version "L-2016.06-1_Full64" -sync_file /tmp/vcs_dve_rpc.jhazel.27534}
+synUtils::sendTool -active {_icl_createSharedMemory /tmp/vcs_dve_general.jhazel.27534}
+config endofsim noexit
+config onfail enable all
+config syscaddplainmembers
+config syscaddsourcenames
+config syscaddstructtypes
+synopsys::listing -disable
+synopsys::dump -add {test} -scope "." -depth 1 -fid VPD0
+synopsys::run
+set ucliGUI::state
+set ucliGUI::state
+set ucliGUI::state
+set ucliGUI::state
+ucliGUI::getSignalValues -scope test -radix {decimal } -list {{B[32:1]} }
+ucliGUI::getSignalValues -scope test -radix {decimal } -list {{S[32:1]} }
+ucliGUI::getSignalValues -scope test -radix {decimal } -list {{A[32:1]} }
+ucliGUI::getSignalValues -scope test -radix {decimal } -list {{A[32:1]} }
+ucliGUI::getSignalValues -scope test -radix {decimal } -list {{B[32:1]} }
+ucliGUI::getSignalValues -scope test -radix {decimal } -list {{S[32:1]} }

@@ -1,0 +1,106 @@
+0 
+32
++itf+/usr/local/synopsys-Fall2016/vcs/linux64/lib/vcsdp.tab
++memcbk
++vcsd
++vpi
+-Mamsrun=
+-Masflags=
+-Mcc=gcc
+-Mcfl= -pipe -fPIC -O -I/usr/local/synopsys-Fall2016/vcs/include
+-Mcplusplus=g++
+-Mcrt0=
+-Mcrtn=
+-Mcsrc=
+-Mexternalobj=
+-Mldflags= -rdynamic
+-Mobjects= /usr/local/synopsys-Fall2016/vcs/linux64/lib/libvirsim.so /usr/local/synopsys-Fall2016/vcs/linux64/lib/liberrorinf.so /usr/local/synopsys-Fall2016/vcs/linux64/lib/libsnpsmalloc.so
+-Mout=simv
+-Msaverestoreobj=/usr/local/synopsys-Fall2016/vcs/linux64/lib/vcs_save_restore_new.o
+-Msyslibs=-ldl
+-Mvcsaceobjs=
+-Mxcflags= -pipe -fPIC -I/usr/local/synopsys-Fall2016/vcs/include
+-Xpiyushb1=0x80
+-Xvcs_run_simv=1
+-debug_access+all+dmptf+bc
+-debug_region=cell+lib
+-full64
+-gen_obj
+-gui
+-picarchive
+-sverilog
+-ucli
+../src/KSadderfix.v
+/usr/local/synopsys-Fall2016/vcs/linux64/bin/vcs1
+61
+sysc_uni_pwd=/home/jhazel/ASIC_Design/src
+XRDP_SOCKET_PATH=/tmp/.xrdp
+XRDP_SESSION=1
+XMODIFIERS=@im=none
+XDG_SESSION_ID=c15
+XDG_RUNTIME_DIR=/run/user/1734682650
+XDG_MENU_PREFIX=gnome-
+XDG_DATA_DIRS=/home/jhazel/.local/share/flatpak/exports/share/:/var/lib/flatpak/exports/share/:/usr/local/share/:/usr/share/
+XDG_CURRENT_DESKTOP=GNOME
+VTE_VERSION=4602
+VMR_MODE_FLAG=64
+VCS_MODE_FLAG=64
+VCS_HOME=/usr/local/synopsys-Fall2016/vcs
+VCS_DEPTH=0
+VCS_ARG_ADDED_FOR_TMP=1
+VCS_ARCH=linux64
+USER_HELP_BROWSER=/usr/bin/firefox
+UNAME=/bin/uname
+TOOL_HOME=/usr/local/synopsys-Fall2016/vcs/linux64
+TMAX_64BIT=true
+SYNOPSYS_HOME=/usr/local/synopsys-Fall2016/syn
+SYNOPSYS=/usr/local/synopsys-Fall2016
+SSH_AUTH_SOCK=/run/user/1734682650/keyring/ssh
+SSH_AGENT_PID=170084
+SNPS_USE64BIT=1
+SNPS_BROWSER=/usr/bin/firefox
+SNPS_ARCH=linux
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/169876,unix/unix:/tmp/.ICE-unix/169876
+SCRNAME=vcs
+SCRIPT_NAME=vcs
+SAED32_PATH=/usr/local/synopsys-Fall2016/SAED32_EDK
+SAED32_28_PDK=/usr/local/synopsys-Fall2016/iPDK
+QT_QPA_PLATFORMTHEME=qgnomeplatform
+QT_IM_MODULE=xim
+QT_GRAPHICSSYSTEM_CHECKED=1
+PULSE_SCRIPT=/etc/xrdp/pulse/default.pa
+OVA_UUM=0
+ORACLE_TERM=vt100
+ORACLE_HOME=/usr/local/oracle/oracle12c
+NANOSIM_64=1
+MODULESHOME=/usr/share/Modules
+MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles
+LOADEDMODULES=
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+LC_ALL=C
+KRB5CCNAME=KEYRING:persistent:1734682650
+IMSETTINGS_MODULE=none
+IMSETTINGS_INTEGRATE_DESKTOP=yes
+ICWBEV_HOME=/usr/local/synopsys-Fall2016/icwbev_plus
+ICV_HOME_DIR=/usr/local/synopsys-Fall2016/icvalidator
+HISTCONTROL=ignoredups
+HERCULES_HOME_DIR=/usr/local/synopsys-Fall2016/hercules
+GTK_IM_MODULE=gtk-im-context-simple
+GNOME_SHELL_SESSION_MODE=classic
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+GJS_DEBUG_TOPICS=JS ERROR;JS LOG
+GJS_DEBUG_OUTPUT=stderr
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-xAP81ZgXYv,guid=566b81baa8650273a1b949c75a286a30
+COLORTERM=truecolor
+BASH_FUNC_module()=() {  eval `/usr/bin/modulecmd bash $*`_}
+ARCHPRO_ROOT=/usr/local/synopsys-Fall2016/mvtools
+0
+2
+1512644002 ../src/KSadderfix.v
+1468724709 /usr/local/synopsys-Fall2016/vcs/linux64/lib/vcsdp.tab
+4
+0 
+1468726936 /usr/local/synopsys-Fall2016/vcs/linux64/lib/libvirsim.so
+1468726453 /usr/local/synopsys-Fall2016/vcs/linux64/lib/liberrorinf.so
+1468726430 /usr/local/synopsys-Fall2016/vcs/linux64/lib/libsnpsmalloc.so
+1512644441 simv.daidir

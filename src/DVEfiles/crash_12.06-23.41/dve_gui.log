@@ -1,0 +1,36 @@
+Warning : License for product VCSRuntime_Net(725) will expire within 26 days, on: 31-dec-2017.
+If you would like to temporarily disable this message, set 
+ the VCS_LIC_EXPIRE_WARNING environment variable to the number of days
+before expiration that you want this message to start (the minimum is 0).
+Chronologic VCS simulator copyright 1991-2016
+Contains Synopsys proprietary information.
+Compiler version L-2016.06-1_Full64; Runtime version L-2016.06-1_Full64;  Dec  6 23:34 2017
+VCD+ Writer L-2016.06-1_Full64 Copyright (c) 1991-2016 by Synopsys Inc.
+The file '/home/jhazel/ASIC_Design/src/inter.vpd' was opened successfully.
+P should be 100. Value =   144112989052596320
+P should be 10000. Value =   144112989052596320
+P should be -25000. Value =   144112989052596320
+P should be 525. Value =   144105292462777012
+$finish called from file "../src/multiplier.v", line 443.
+$finish at simulation time                   10
+Simulation complete, time is 10.
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 10
+CPU Time:      0.150 seconds;       Data structure size:   0.9Mb
+Wed Dec  6 23:40:49 2017
+*** FATAL: Simulation stopped due to an error (please see above in the log for more details)
+The simulation cannot be continued. The current simulation state can be observed in DVE/UCLI.
+---------------------------------------------
+
+Simulation has just terminated due to a severe internal error:
+
+
+Release = 'L-2016.06-1_Full64'  Architecture = 'amd64'  Program = 'DVE'
+
+'33401409 33438602 30984476 41756156 30999948 41760375 41768934 41769099 31003344 30993040 30993103 31305516 30578186 29692477 22277223 22284414 22285462 22437933 22532404 22540451 22470769 22165146 43593448 43103109 43104021 33910194 33725581 42798902 42793600 42851338 18230113 43169145 43168986 18228439 17964196 14386505 139760797883397'
+
+---------------------------------------------
+===============================DVE Context================================
+Function="swSubjEdit::getSignalByIdentifierByLine, View: source view, Operation: lookup signal, Parameters: Design: Sim,identifier: compressor_5_3,file: /home/jhazel/ASIC_Design/src/../src/compressor_5_3.v,line: 1" 
+Command line: /usr/local/synopsys-Fall2016/vcs/gui/dve/linux64/bin/dve.exe -full64 -ucliplatform=linux64 -toolargs "-ucligui -toolexe simv  -pid 145807" -toolin /tmp/vcs_20171207035619_145806_jhazel..stdin -toolout /tmp/vcs_20171207035619_145806_jhazel..stdout
+==========================================================================

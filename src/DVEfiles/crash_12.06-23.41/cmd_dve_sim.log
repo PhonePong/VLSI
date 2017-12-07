@@ -1,0 +1,49 @@
+set ucliGUI::state
+set ucliGUI::state
+ucliCore::getToolPID
+synopsys::env hasTB
+trigger_hier_stack_context_switch 0
+synUtils::setDVEInitPhase 1
+synopsys::dump -type VPD -file /home/jhazel/ASIC_Design/src/inter.vpd -locking
+synopsys::dump -autoflush on -fid VPD0
+set ::dve_fid VPD0
+synUtils::setDVEInitPhase 0
+ucliCore::getToolPID
+synUtils::sendTool -active _icl_setToolSocket /tmp/smlnplfhioM
+synUtils::sendTool -active {_icl_start_rpc -version "L-2016.06-1_Full64" -sync_file /tmp/vcs_dve_rpc.jhazel.163230}
+synUtils::sendTool -active {_icl_createSharedMemory /tmp/vcs_dve_general.jhazel.163230}
+config endofsim noexit
+config onfail enable all
+config syscaddplainmembers
+config syscaddsourcenames
+config syscaddstructtypes
+synopsys::listing -disable
+synopsys::dump -add {test} -scope "." -depth 1 -fid VPD0
+synopsys::run
+set ucliGUI::state
+set ucliGUI::state
+set ucliGUI::state
+set ucliGUI::state
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{Monitor1[64:0]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{Monitor2[64:0]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{Monitor3[64:0]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{Monitor4[64:0]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{Monitor5[64:0]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{Monitor6[64:0]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{Monitor7[64:0]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{Monitor8[64:0]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{Monitor9[64:0]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{Monitor10[64:0]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{Monitor11[64:0]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{Monitor12[64:0]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{Monitor13[64:0]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{Monitor14[64:0]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{Monitor15[64:0]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{Monitor16[64:0]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{Monitor17[64:0]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{Monitor18[64:0]} }
+if [catch {gui_sim_terminate}] {gui_sim_terminate -kill}
+synopsys::finish
+set ucliGUI::state
+set ucliGUI::state
+ucli_exit
