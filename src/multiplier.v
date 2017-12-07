@@ -1,74 +1,181 @@
-module n_bit_pg_Kogge_Stone_A 
+module multiplier
 
   #(parameter N = 32) // The parameter "N" may be edited to change bit count.
 
    (input logic [N:1] A, B, //Two N-bit input words.
     output logic [N*2:1] P, //N-bit Product.
-    output logic O); //1-bit overflow flag
+    output logic O,
+    output logic [64:0] Monitor1,
+    output logic [64:0] Monitor2,
+    output logic [64:0] Monitor3,
+    output logic [64:0] Monitor4,
+    output logic [64:0] Monitor5,
+    output logic [64:0] Monitor6,
+    output logic [64:0] Monitor7,
+    output logic [64:0] Monitor8,
+    output logic [64:0] Monitor9,
+    output logic [64:0] Monitor10,
+    output logic [64:0] Monitor11,
+    output logic [64:0] Monitor12,
+    output logic [64:0] Monitor13,
+    output logic [64:0] Monitor14,
+    output logic [64:0] Monitor15,
+    output logic [64:0] Monitor16,
+    output logic [64:0] Monitor17,
+    output logic [64:0] Monitor18); //1-bit overflow flag
   
-  wire Xtended[N+1:-1];
+  wire [(N+2):0] Xtended;
+ 
+  assign Xtended = {1'b0,1'b0,A,1'b0};
   
-  assign Xtended = {0,A,0,0};
+  wire [N/2:0] S;//wires for single, double, negative lines for 17 booth encoder/selectors
+  wire [N/2:0] D;
+  wire [N/2:0] NN;
   
-  genvar i;
-  
-  wire S[N/2:0];
-  wire D[N/2:0];
-  wire NN[N/2:0];
-  
-  generate 
-    
-    for (i=0; i<=N+2; i=i+2); begin : encoders
-      rad4_booth_encoder e1 (Xtended[i-1], Xtended[i], Xtended[i+1], S[i/2], D[i/2], NN[i/2]);
-    end
-    
-  endgenerate
   
   wire [N:0] Partials [16:0]; //array of 17 33 bit wires to assign partial products
   
+  
+  wire [(N*2):1] PartialES [16:0]; 	//extended partials to 64 columns, 65 to make the loop work. 
+  wire [16:0] e; 					//sign bits for each PP
+  
+  genvar x;
+  generate
+    for(x = 0; x <= 16; x = x + 1) begin //negative bit XOR with sign bit of Y coming in
+      assign e[x] = ^{NN[x],B[N]};
+    end
+    //assign partial products into 64 bit signals according to figure 11.83
+    assign PartialES[0] = {~e[0], e[0], e[0], Partials[0]}; //assign first partial, different from the rest.
+
+    for( x = 1; x <= 14; x = x + 1) begin
+      assign PartialES[x] = {1'b1, ~e[x], Partials[x], 1'b0, NN[x], {(x-1)*2{1'b0}}}; //extra 0 to allow for pad column. 
+    end
+  endgenerate
+  
+  genvar i;
+  
   generate 
     
-    for (i=0; i<=N/2; i=i+1); begin : selectors
-      rad4_booth_selector p1 (Partials[i], A, S[i], D[i], NN[i]);
+    for (i=0; i<=N; i=i+2) begin : encoders
+      rad4_booth_encoder e1 (Xtended[i], Xtended[i+1], Xtended[i+2], S[i/2], D[i/2], NN[i/2]);
+    end
+  
+    
+    for (i=0; i<=N/2; i=i+1) begin : selectors
+      booth_selector p1 (Partials[i], A, S[i], D[i], NN[i]);
     end
     
   endgenerate
   
-  wire [(N*2):1] PartialES [16:0];
-  wire e[16:0];
   
-  int x;
-  for(x = 0; x <= 16; x = x + 1); begin
-    assign e[x] = NN[i] ^ B[N];
-  end
-      
-  for(x = 1; x <= 16; x = x + 1); begin
-    assign PartialES[x] = {1, ~e[x], Partials[x], 0, NN[x], {x-1}0};
-  end
+  
+
+  
+  assign PartialES[15] = {~(e[15]), Partials[15], 1'b0, NN[14], {28{1'b0}}};
+  assign PartialES[16] = {{30{1'b0}},1'b0,NN[16]};
    
-  wire [3:0] intS1[16:0];
-  wire [3:0] intC1[16:0];
-  wire [1:0] intS2[16:0];
-  wire [1:0] intC2[16:0];
-  wire intS3[16:0];
-  wire intC3[16:0];
+  wire  intcarry1 [64:0][4:0]; //65 5 bit busses
+  wire  intcarry2 [64:0][2:0];
+  wire intcarry3 [64:0];
   
-  wire Treesum[16:0];
-  wire Treecarry[16:0];
+  wire [4:1] intC1 [64:0];
+  wire [4:1] intS1 [64:0];
+  
+  wire [2:1] intS2 [64:0];
+  wire [2:1] intC2 [64:0];
+  wire intS3 [64:0];
+  wire intC3 [64:0];
+  
+  wire [64:1] Treesum;
+  wire [64:1] Treecarry;
+  
+  
+  
+  assign intcarry1[0][0] = 0;
+  assign intcarry1[0][1] = 0;
+  assign intcarry1[0][2] = 0;
+  assign intcarry1[0][3] = 0;
+  assign intcarry1[0][4] = 0;
+  
+  assign intcarry2[0][1] = 0;//intitialize
+  assign intcarry2[0][2] = 0;
+  assign intcarry3[0] = 0;
+  
+
+  genvar z;
+  generate
+  for(z=0;z<=64;z=z+1) begin
+  
+	assign intC1[0][1] = 0;
+	assign intC1[0][2] = 0;
+	assign intC1[0][3] = 0;
+	assign intC1[0][4] = 0;
+	
+	assign intC2[0][1] = 0;
+	assign intC2[0][2] = 0;
+	
+	assign intC3[0] = 0;
+  end
+  endgenerate
   
   genvar ii;
-  
   generate
-    for(ii=0;ii<=16;ii=ii+1); begin : columns
-      for(i=1; i<=4; i=i+1); begin : compressors
-        compressor_5_3 Comps1 (PartialES[ii][i*2],PartialES[ii][(i*2)+1],PartialES[ii][(i*2)+2],PartialES[ii][(i*2)+3], IntC1[ii+1][i],);
+    for(ii=1;ii<=64;ii=ii+1) begin
+    genvar k;
+      for(k=1; k<=4; k=k+1) begin
+        compressor_5_3 Comps1 (PartialES[0+((k-1)*4)][ii],PartialES[1+((k-1)*4)][ii],PartialES[2+((k-1)*4)][ii],PartialES[3+((k-1)*4)][ii],intcarry1[ii-1][k],intC1[ii][k],intcarry1[ii][k],intS1[ii][k]);//YOU WERE RIGHT THE FIRST TIME YOU DUMB SHIT
       end
-      for(i=
+      for(k=1; k<=2; k=k+1) begin
+        compressor_5_3 Comps2 (intS1[ii][k],intC1[ii-1][k],intS1[ii][k+1],intC1[ii-1][k+1],intcarry2[ii-1][k],intC2[ii][k],intcarry2[ii][k],intS2[ii][k]);//AAAAAAAAAAAAAAAAAAAA FIX THE FUCKIN CARRIES YOU SHITHEAD
+      end
+      compressor_5_3 Comp3 (intS2[ii][1],intC2[ii-1][1],intS2[ii][2],intC2[ii-1][2],intcarry3[ii-1],intC3[ii],intcarry3[ii],intS3[ii]);
       
+	  full_adder finals (intS3[ii],intC3[ii-1],PartialES[16][ii],Treecarry[ii],Treesum[ii]);
     end
-    
   endgenerate
   
+  wire midcarry; //carry between two final KS adders
+  wire NC[1:0];
+  n_bit_pg_Kogge_Stone_A A1 (Treesum[32:1],Treecarry[32:1],1'b0,P[32:1],midcarry);
+  n_bit_pg_Kogge_Stone_A A2 (Treesum[64:33],Treecarry[64:33],midcarry,P[64:33],O);
+  
+  
+  assign Monitor1 = {1'bZ,PartialES[0]};
+  assign Monitor2 = {1'bZ,PartialES[1]};
+  assign Monitor3 = {1'bZ,PartialES[2]};
+  assign Monitor4 = {1'bZ,PartialES[0][1]};
+  assign Monitor5 = {1'bZ,PartialES[1][1]};
+  assign Monitor6 = {1'bZ,PartialES[2][1]};
+  assign Monitor7 = {1'bZ,PartialES[3][1]};
+  assign Monitor8 = {1'bZ,intC1[1][1]};
+  assign Monitor9 = {1'bZ,intcarry1[1][1]};
+  assign Monitor10 = {1'bZ,intS1[1][1]};
+  assign Monitor11 = {1'bZ,intcarry1[0][1]};
+  assign Monitor12 = {1'bZ,intS1[6]};
+  assign Monitor13 = {1'bZ,intS1[7]};
+  assign Monitor14 = {1'bZ,intS1[8]};
+  assign Monitor15 = {1'bZ,intS1[9]};
+  assign Monitor16 = {1'bZ,e};
+  assign Monitor17 = {1'bZ,Treecarry};
+  assign Monitor18 = {1'bZ,Treesum};
+  
+endmodule
+
+module full_adder
+	// From pg. 440,
+	// 	A = G(i:k)
+	// 	B = G(k-1:j)
+	// 	Cin = P(i:k)
+	// 	gOut = G(i:j)
+	(input logic A, B, Cin, 
+	 output logic Cout, S);
+
+	wire w, w2, w3;
+	assign w = A ^ B;
+	assign S = Cin ^ w;
+	assign w2 = A & B;
+	assign w3 = w & Cin;
+	assign Cout = w2 | w3;
 endmodule
 
 module compressor_5_3 //see diagram in report/gitHub
@@ -289,3 +396,51 @@ module v2_black_cell
 	assign gOut = g1 + w;
 	assign pOut = p1 & p2;
 endmodule
+
+module test
+	
+  #(parameter N= 32);
+	//#(parameter N = 31);
+  logic [N:1] A, B; //Two N-bit input words.
+  logic [N*2:1] P; //N-bit Product.
+  logic O; //1-bit overflow flag
+  logic [64:0] Monitor1;
+  logic [64:0] Monitor2;
+  logic [64:0] Monitor3;
+  logic [64:0] Monitor4;
+  logic [64:0] Monitor5;
+  logic [64:0] Monitor6;
+  logic [64:0] Monitor7;
+  logic [64:0] Monitor8;
+  logic [64:0] Monitor9;
+  logic [64:0] Monitor10;
+  logic [64:0] Monitor11;
+  logic [64:0] Monitor12;
+  logic [64:0] Monitor13;
+  logic [64:0] Monitor14;
+  logic [64:0] Monitor15;
+  logic [64:0] Monitor16;
+  logic [64:0] Monitor17;
+  logic [64:0] Monitor18;
+
+  multiplier M (A,B,P,o,Monitor1,Monitor2,Monitor3,Monitor4,Monitor5,Monitor6,Monitor7,Monitor8,Monitor9,Monitor10,Monitor11,Monitor12,Monitor13,Monitor14,Monitor15,Monitor16,Monitor17,Monitor18);
+
+	initial
+		begin
+		  A=10;
+          B=10;
+		#2 
+          $display("P should be 100. Value = %d", P);
+	
+	//	#2 B=1000;
+          $display("P should be 10000. Value = %d", P);
+
+	//	#2 A=-25;
+          $display("P should be -25000. Value = %d", P);
+
+	//	#2 B=-25;
+          $display("P should be 525. Value = %d", P);
+
+		#2 $finish;
+		end
+endmodule 
