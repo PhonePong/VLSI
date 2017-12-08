@@ -30,7 +30,7 @@
 -picarchive
 -sverilog
 -ucli
-../src/KSadderfix.v
+../src/compressor_test.v
 /usr/local/synopsys-Fall2016/vcs/linux64/bin/vcs1
 61
 sysc_uni_pwd=/home/jhazel/ASIC_Design/src
@@ -96,11 +96,11 @@ BASH_FUNC_module()=() {  eval `/usr/bin/modulecmd bash $*`_}
 ARCHPRO_ROOT=/usr/local/synopsys-Fall2016/mvtools
 0
 2
-1512644002 ../src/KSadderfix.v
+1512725744 ../src/compressor_test.v
 1468724709 /usr/local/synopsys-Fall2016/vcs/linux64/lib/vcsdp.tab
 4
 0 
 1468726936 /usr/local/synopsys-Fall2016/vcs/linux64/lib/libvirsim.so
 1468726453 /usr/local/synopsys-Fall2016/vcs/linux64/lib/liberrorinf.so
 1468726430 /usr/local/synopsys-Fall2016/vcs/linux64/lib/libsnpsmalloc.so
-1512644441 simv.daidir
+1512726160 simv.daidir

@@ -119,8 +119,8 @@ int i;
 		icins = number[23:17];
 		cins = number[30:18];
     
-	for(i=0;i<=30;i=i+1) begin
-     #2 number   = 31'b1000000000000010000000000000000;
+	for(i=0;i<=1000;i=i+1) begin
+     #2 number   = i;
 	 Y= number [16:0];
 	 icins = number[23:17];
 	 cins = number[30:18];

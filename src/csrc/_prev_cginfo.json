@@ -1,63 +1,49 @@
 {
-    "CompileProcesses": [
-        "cgproc.25996.json"
-    ],
+    "CurCompileUdps": {},
+    "Misc": {
+        "cwd": "/home/jhazel/ASIC_Design/src",
+        "default_output_dir": "csrc",
+        "csrc": "csrc",
+        "csrc_abs": "/home/jhazel/ASIC_Design/src/csrc",
+        "archive_dir": "archive.152",
+        "daidir": "simv.daidir",
+        "daidir_abs": "/home/jhazel/ASIC_Design/src/simv.daidir"
+    },
+    "PEModules": [],
     "MlibObjs": {},
+    "CompileProcesses": [
+        "cgproc.1283.json"
+    ],
     "PrevCompiledModules": {
-        "v2_gray_cell": {
-            "HrFPj_d": {
-                "checksum": 0,
-                "mod": "v2_gray_cell",
-                "bytes": 8263,
-                "out": "HrFPj_d.o",
-                "mode": 4,
-                "archive": "archive.109/_prev_archive_1.a"
-            }
-        },
-        "v2_black_cell": {
-            "t2G2s_d": {
-                "checksum": 0,
-                "mod": "v2_black_cell",
-                "bytes": 8817,
-                "out": "t2G2s_d.o",
-                "mode": 4,
-                "archive": "archive.109/_prev_archive_1.a"
-            }
-        },
         "std": {
             "reYIK_d": {
-                "checksum": 0,
-                "mod": "std",
-                "bytes": 41566,
+                "archive": "archive.152/_prev_archive_1.a",
                 "mode": 4,
-                "archive": "archive.109/_prev_archive_1.a",
+                "bytes": 41566,
+                "mod": "std",
+                "checksum": 0,
                 "out": "reYIK_d.o"
             }
         },
         "...MASTER...": {
             "amcQw_d": {
-                "checksum": 0,
-                "mod": "...MASTER...",
-                "bytes": 7560,
                 "mode": 4,
+                "bytes": 7560,
+                "mod": "...MASTER...",
+                "checksum": 0,
                 "out": "objs/amcQw_d.o"
             }
         },
         "test": {
             "x9Hvb_d": {
-                "checksum": 0,
-                "mod": "test",
-                "bytes": 92615,
-                "out": "x9Hvb_d.o",
+                "archive": "archive.152/_1283_archive_1.a",
                 "mode": 4,
-                "archive": "archive.109/_25996_archive_1.a"
+                "bytes": 97009,
+                "mod": "test",
+                "out": "x9Hvb_d.o",
+                "checksum": 0
             }
         }
-    },
-    "CompileStatus": "Successful",
-    "SIMBData": {
-        "out": "amcQwB.o",
-        "bytes": 91860
     },
     "NameTable": {
         "std": [
@@ -65,14 +51,9 @@
             "reYIK",
             "module"
         ],
-        "v2_black_cell": [
-            "v2_black_cell",
-            "t2G2s",
-            "module"
-        ],
-        "v2_gray_cell": [
-            "v2_gray_cell",
-            "HrFPj",
+        "compressor_5_3": [
+            "compressor_5_3",
+            "GxQnj",
             "module"
         ],
         "test": [
@@ -87,73 +68,68 @@
         ]
     },
     "CompileStrategy": "fullobj",
-    "LVLData": [
-        "SIM"
-    ],
+    "SIMBData": {
+        "out": "amcQwB.o",
+        "bytes": 90371
+    },
     "stat": {
-        "CodeGen(%)": 32.133303564282194,
-        "outputSizePerQuad": 53.0,
         "ru_self_cgstart": {
-            "ru_nivcsw": 129,
-            "ru_utime_sec": 0.161104,
-            "ru_stime_sec": 0.043756000000000003,
-            "ru_nvcsw": 395,
-            "ru_maxrss_kb": 63452,
+            "ru_utime_sec": 0.060435999999999997,
+            "ru_maxrss_kb": 60876,
+            "ru_stime_sec": 0.031613000000000002,
+            "ru_nvcsw": 456,
+            "ru_minflt": 14847,
             "ru_majflt": 0,
-            "ru_minflt": 15740
+            "ru_nivcsw": 81
         },
+        "mopSpeed": 64110.57159551105,
+        "CodeGen(%)": 45.092623717849712,
         "ru_childs_cgstart": {
-            "ru_nivcsw": 8,
-            "ru_utime_sec": 0.003875,
-            "ru_stime_sec": 0.007685,
-            "ru_nvcsw": 26,
-            "ru_maxrss_kb": 17312,
+            "ru_utime_sec": 0.0040330000000000001,
+            "ru_maxrss_kb": 16620,
+            "ru_stime_sec": 0.010657,
+            "ru_nvcsw": 32,
+            "ru_minflt": 2164,
             "ru_majflt": 0,
-            "ru_minflt": 2162
+            "ru_nivcsw": 8
         },
-        "nMops": 8473,
-        "nQuads": 3631,
-        "Frontend(%)": 67.866696435717799,
-        "ru_childs_end": {
-            "ru_nivcsw": 10,
-            "ru_utime_sec": 0.0062420000000000002,
-            "ru_stime_sec": 0.010052999999999999,
-            "ru_nvcsw": 34,
-            "ru_maxrss_kb": 22412,
-            "ru_majflt": 0,
-            "ru_minflt": 2761
-        },
-        "mop/quad": 2.3335169374827873,
-        "totalObjSize": 194768,
+        "nMops": 3182,
         "ru_self_end": {
-            "ru_nivcsw": 143,
-            "ru_utime_sec": 0.23738300000000001,
-            "ru_stime_sec": 0.055159,
-            "ru_nvcsw": 548,
-            "ru_maxrss_kb": 71844,
+            "ru_utime_sec": 0.110069,
+            "ru_maxrss_kb": 69068,
+            "ru_stime_sec": 0.046899000000000003,
+            "ru_nvcsw": 611,
+            "ru_minflt": 18134,
             "ru_majflt": 0,
-            "ru_minflt": 19417
+            "ru_nivcsw": 100
         },
-        "quadSpeed": 47601.567928263343,
-        "mopSpeed": 111079.06501133993
+        "nQuads": 1376,
+        "ru_childs_end": {
+            "ru_utime_sec": 0.0058809999999999999,
+            "ru_maxrss_kb": 20396,
+            "ru_stime_sec": 0.013428000000000001,
+            "ru_nvcsw": 40,
+            "ru_minflt": 2762,
+            "ru_majflt": 0,
+            "ru_nivcsw": 10
+        },
+        "totalObjSize": 145022,
+        "outputSizePerQuad": 105.0,
+        "quadSpeed": 27723.490419680453,
+        "mop/quad": 2.3125,
+        "Frontend(%)": 54.907376282150281
     },
     "CurCompileModules": [
         "...MASTER...",
+        "...MASTER...",
         "std",
-        "v2_gray_cell",
-        "v2_black_cell",
+        "compressor_5_3",
+        "compressor_5_3",
         "test",
         "test"
     ],
-    "CurCompileUdps": {},
-    "PEModules": [],
-    "Misc": {
-        "cwd": "/home/jhazel/ASIC_Design/src",
-        "csrc_abs": "/home/jhazel/ASIC_Design/src/csrc",
-        "csrc": "csrc",
-        "daidir_abs": "/home/jhazel/ASIC_Design/src/simv.daidir",
-        "daidir": "simv.daidir",
-        "default_output_dir": "csrc",
-        "archive_dir": "archive.109"
-    }
+    "LVLData": [
+        "SIM"
+    ],
+    "CompileStatus": "Successful"
 }

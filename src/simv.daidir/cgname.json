@@ -1,27 +1,22 @@
 {
-    "v2_black_cell": [
-        "v2_black_cell",
-        "t2G2s",
-        "module"
-    ],
     "std": [
         "std",
         "reYIK",
         "module"
     ],
-    "...MASTER...": [
-        "SIM",
-        "amcQw",
-        "module"
-    ],
-    "v2_gray_cell": [
-        "v2_gray_cell",
-        "HrFPj",
+    "compressor_5_3": [
+        "compressor_5_3",
+        "GxQnj",
         "module"
     ],
     "test": [
         "test",
         "x9Hvb",
+        "module"
+    ],
+    "...MASTER...": [
+        "SIM",
+        "amcQw",
         "module"
     ]
 }

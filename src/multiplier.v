@@ -4,25 +4,7 @@ module multiplier
 
    (input logic [N:1] A, B, //Two N-bit input words.
     output logic [N*2:1] P, //N-bit Product.
-    output logic O,
-    output logic [64:0] Monitor1,
-    output logic [64:0] Monitor2,
-    output logic [64:0] Monitor3,
-    output logic [64:0] Monitor4,
-    output logic [64:0] Monitor5,
-    output logic [64:0] Monitor6,
-    output logic [64:0] Monitor7,
-    output logic [64:0] Monitor8,
-    output logic [64:0] Monitor9,
-    output logic [64:0] Monitor10,
-    output logic [64:0] Monitor11,
-    output logic [64:0] Monitor12,
-    output logic [64:0] Monitor13,
-    output logic [64:0] Monitor14,
-    output logic [64:0] Monitor15,
-    output logic [64:0] Monitor16,
-    output logic [64:0] Monitor17,
-    output logic [64:0] Monitor18); //1-bit overflow flag
+    output logic O); //1-bit overflow flag
   
   wire [(N+2):0] Xtended;
  
@@ -62,7 +44,7 @@ module multiplier
   
     
     for (i=0; i<=N/2; i=i+1) begin : selectors
-      booth_selector p1 (Partials[i], A, S[i], D[i], NN[i]);
+      booth_selector p1 (Partials[i], B, S[i], D[i], NN[i]);
     end
     
   endgenerate
@@ -156,26 +138,6 @@ module multiplier
   wire NC[1:0];
   n_bit_pg_Kogge_Stone_A A1 (Treesum[32:1],Treecarry[32:1],1'b0,P[32:1],midcarry);
   n_bit_pg_Kogge_Stone_A A2 (Treesum[64:33],Treecarry[64:33],midcarry,P[64:33],O);az*/
-  
-  
-  assign Monitor1 = {1'bZ,PartialES[0]};
-  assign Monitor2 = {1'bZ,PartialES[1]};
-  assign Monitor3 = {1'bZ,PartialES[2]};
-  assign Monitor4 = {1'bZ,PartialES[0][1]};
-  assign Monitor5 = {1'bZ,PartialES[1][1]};
-  assign Monitor6 = {1'bZ,PartialES[2][1]};
-  assign Monitor7 = {1'bZ,PartialES[3][1]};
-  assign Monitor8 = {1'bZ,intC1[1][1]};
-  assign Monitor9 = {1'bZ,intcarry1[1][1]};
-  assign Monitor10 = {1'bZ,intS1[1][1]};
-  assign Monitor11 = {1'bZ,intcarry1[0][1]};
-  assign Monitor12 = {1'bZ,intS1[6]};
-  assign Monitor13 = {1'bZ,intS1[7]};
-  assign Monitor14 = {1'bZ,intS1[8]};
-  assign Monitor15 = {1'bZ,intS1[9]};
-  assign Monitor16 = {1'bZ,e};
-  assign Monitor17 = {1'bZ,Treecarry};
-  assign Monitor18 = {1'bZ,Treesum};
   
 endmodule
 
@@ -432,41 +394,23 @@ module test
   logic [N:1] A, B; //Two N-bit input words.
   logic [N*2:1] P; //N-bit Product.
   logic O; //1-bit overflow flag
-  logic [64:0] Monitor1;
-  logic [64:0] Monitor2;
-  logic [64:0] Monitor3;
-  logic [64:0] Monitor4;
-  logic [64:0] Monitor5;
-  logic [64:0] Monitor6;
-  logic [64:0] Monitor7;
-  logic [64:0] Monitor8;
-  logic [64:0] Monitor9;
-  logic [64:0] Monitor10;
-  logic [64:0] Monitor11;
-  logic [64:0] Monitor12;
-  logic [64:0] Monitor13;
-  logic [64:0] Monitor14;
-  logic [64:0] Monitor15;
-  logic [64:0] Monitor16;
-  logic [64:0] Monitor17;
-  logic [64:0] Monitor18;
 
-  multiplier M (A,B,P,o,Monitor1,Monitor2,Monitor3,Monitor4,Monitor5,Monitor6,Monitor7,Monitor8,Monitor9,Monitor10,Monitor11,Monitor12,Monitor13,Monitor14,Monitor15,Monitor16,Monitor17,Monitor18);
+  multiplier M (A,B,P,o);
 
 	initial
 		begin
-		  A=10;
-          B=10;
+		  A=9;
+          B=9;
 		#2 
           $display("P should be 100. Value = %d", P);
 	
-	//	#2 B=1000;
+		#2 B=10;
           $display("P should be 10000. Value = %d", P);
 
-	//	#2 A=-25;
+		#2 A=5;
           $display("P should be -25000. Value = %d", P);
 
-	//	#2 B=-25;
+		#2 B=300;
           $display("P should be 525. Value = %d", P);
 
 		#2 $finish;

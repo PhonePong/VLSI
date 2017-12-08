@@ -1,0 +1,50 @@
+{
+    "Modules": {
+        "...MASTER...": {},
+        "std": {
+            "Compiled": "Yes",
+            "Compiled Times": 113
+        },
+        "compressor_5_3": {
+            "Compiled": "Yes",
+            "Compiled Times": 2
+        },
+        "test": {
+            "Compiled": "Yes",
+            "Compiled Times": 112
+        }
+    },
+    "CompUnits": {
+        "x9Hvb_d": {
+            "mode": 4,
+            "out": "x9Hvb_d.o",
+            "mod": "test",
+            "bytes": 27718,
+            "checksum": 0,
+            "archive": "archive.158/_7809_archive_1.a"
+        }
+    },
+    "reusePaths": {
+        "amcQw_d": {
+            "icPath": "csrc"
+        },
+        "reYIK_d": {
+            "icPath": "csrc"
+        },
+        "GxQnj_d": {
+            "icPath": "csrc"
+        }
+    },
+    "ObjArchives": [
+        {
+            "archive": "archive.158/_7809_archive_1.a",
+            "objects": [
+                [
+                    "x9Hvb_d.o",
+                    27718
+                ]
+            ],
+            "size": 27718
+        }
+    ]
+}

@@ -1,0 +1,95 @@
+{
+    "reusePaths": {
+        "reYIK_d": {
+            "icPath": "csrc"
+        }
+    },
+    "CompUnits": {
+        "HrFPj_d": {
+            "mode": 4,
+            "mod": "v2_gray_cell",
+            "out": "HrFPj_d.o",
+            "bytes": 8271,
+            "checksum": 0,
+            "archive": "archive.145/_179862_archive_1.a"
+        },
+        "amcQw_d": {
+            "mode": 4,
+            "mod": "...MASTER...",
+            "out": "objs/amcQw_d.o",
+            "bytes": 7568,
+            "checksum": 0
+        },
+        "VUi1s_d": {
+            "mode": 4,
+            "mod": "N_Bit_Group_PG_0000",
+            "out": "VUi1s_d.o",
+            "bytes": 80601,
+            "checksum": 0,
+            "archive": "archive.145/_179862_archive_1.a"
+        },
+        "t2G2s_d": {
+            "mode": 4,
+            "mod": "v2_black_cell",
+            "out": "t2G2s_d.o",
+            "bytes": 8825,
+            "checksum": 0,
+            "archive": "archive.145/_179862_archive_1.a"
+        },
+        "MHKQQ_d": {
+            "mode": 4,
+            "mod": "test_calc",
+            "out": "MHKQQ_d.o",
+            "bytes": 47903,
+            "checksum": 0,
+            "archive": "archive.145/_179862_archive_1.a"
+        }
+    },
+    "Modules": {
+        "...MASTER...": {},
+        "std": {
+            "Compiled": "Yes",
+            "Compiled Times": 112
+        },
+        "test_calc": {
+            "Compiled": "Yes",
+            "Compiled Times": 1
+        },
+        "N_Bit_Group_PG_0000": {
+            "Compiled": "Yes",
+            "Compiled Times": 1
+        },
+        "v2_black_cell": {
+            "Compiled": "Yes",
+            "Compiled Times": 15
+        },
+        "v2_gray_cell": {
+            "Compiled": "Yes",
+            "Compiled Times": 15
+        }
+    },
+    "ObjArchives": [
+        {
+            "size": 145600,
+            "archive": "archive.145/_179862_archive_1.a",
+            "objects": [
+                [
+                    "VUi1s_d.o",
+                    80601
+                ],
+                [
+                    "HrFPj_d.o",
+                    8271
+                ],
+                [
+                    "t2G2s_d.o",
+                    8825
+                ],
+                [
+                    "MHKQQ_d.o",
+                    47903
+                ]
+            ]
+        }
+    ]
+}

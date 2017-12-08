@@ -15,19 +15,22 @@ module Toplevel_ALU //This module assembles submodules into ALU
 	//wire SumOvf, DiffOvf, ProdOvf, EProdOvf, NatProdOvf, DivOvf; //overflow signals
 	wire Cout_add;
 	wire Cout_sub;
+	wire Mult_ovf;
 	
 	// #(.N N) force lower modules to this N value
 	// Addition
-	n_bit_pg_Kogge_Stone_A Adder (A, B, Sum, Cout_add);
+	n_bit_pg_Kogge_Stone_A Adder (A, B, 1'b0, Sum, Cout_add);
 	// Subtraction
 	n_bit_pg_Kogge_Stone_S Sub (A, B, Diff, Cout_sub);
 	// Multiplication
-	assign m = 10;
+	multiplier mult (A, B, m, Mult_ovf);
 	//Mult_Name Mult #(.N N) (A,B,Prod,ProdOvf,ProdValid);
 	// Division
 	divide Div (A, B, Quotient, Remainder);
 	
-	mux mux_1(Sel, {Cout_add, Sum}, {Cout_sub, Diff}, m, {Remainder, Quotient}, mux_out); // instantiate the mux module.
+	mux mux_1(Sel, {{32{Sum[N - 1]}}, Sum}, {{32{Diff[N - 1]}}, Diff}, {{32{m[N - 1]}}, m}, {Remainder, Quotient}, mux_out); // instantiate the mux module.
+	
+	assign Result = mux_out;
 endmodule
 // =======================================================================================================
 
@@ -262,6 +265,255 @@ module divide // from https://www.youtube.com/watch?v=zbuldnBPNWg
 		end 
 endmodule
 
+// =================================== MLUTIPLIIIIER=======================================================
+
+module multiplier
+
+  #(parameter N = 32) // The parameter "N" may be edited to change bit count.
+
+   (input logic [N:1] A, B, //Two N-bit input words.
+    output logic [N*2:1] P, //N-bit Product.
+    output logic O); //1-bit overflow flag
+  
+  wire [(N+2):0] Xtended;
+ 
+  assign Xtended = {A[32],A[32],A,1'b0};
+  
+  wire [N/2:0] S;//wires for single, double, negative lines for 17 booth encoder/selectors
+  wire [N/2:0] D;
+  wire [N/2:0] NN;
+  
+  
+  wire [N:0] Partials [16:0]; //array of 17 33 bit wires to assign partial products
+  
+  
+  wire [(N*2):1] PartialES [16:0]; 	//extended partials to 64 columns, 65 to make the loop work. 
+  wire [16:0] e; 					//sign bits for each PP
+  
+  genvar x;
+  generate
+    for(x = 0; x <= 16; x = x + 1) begin //negative bit XOR with sign bit of Y coming in
+      assign e[x] = ^{B[N],Xtended[2*x+2]};
+    end
+    //assign partial products into 64 bit signals according to figure 11.83
+    assign PartialES[0] = {~e[0], e[0], e[0], Partials[0]}; //assign first partial, different from the rest.
+
+    for( x = 1; x <= 14; x = x + 1) begin
+      assign PartialES[x] = {1'b1, ~e[x], Partials[x], 1'b0, NN[x-1], {(x-1)*2{1'b0}}}; //extra 0 to allow for pad column. 
+    end
+  endgenerate
+  
+  genvar i;
+  
+  generate 
+    
+    for (i=0; i<=N; i=i+2) begin : encoders
+      rad4_booth_encoder e1 (Xtended[i], Xtended[i+1], Xtended[i+2], S[i/2], D[i/2], NN[i/2]);
+    end
+  
+    
+    for (i=0; i<=N/2; i=i+1) begin : selectors
+      booth_selector p1 (Partials[i], A, S[i], D[i], NN[i]);
+    end
+    
+  endgenerate
+  
+  
+  
+
+  
+  assign PartialES[15] = {~(e[15]), Partials[15], 1'b0, NN[14], {28{1'b0}}};
+  assign PartialES[16] = {{30{1'b0}},1'b0,NN[15]};
+   
+  wire  intcarry1 [64:0][4:0]; //65 5 bit busses
+  wire  intcarry2 [64:0][2:0];
+  wire intcarry3 [64:0];
+  
+  wire [4:1] intC1 [64:0];
+  wire [4:1] intS1 [64:0];
+  
+  wire [2:1] intS2 [64:0];
+  wire [2:1] intC2 [64:0];
+  wire intS3 [64:0];
+  wire intC3 [64:0];
+  
+  wire [64:1] Treesum;
+  wire [64:1] Treecarry;
+  
+  
+  
+  assign intcarry1[0][0] = 0;
+  assign intcarry1[0][1] = 0;
+  assign intcarry1[0][2] = 0;
+  assign intcarry1[0][3] = 0;
+  assign intcarry1[0][4] = 0;
+  
+  assign intcarry2[0][1] = 0;//intitialize
+  assign intcarry2[0][2] = 0;
+  assign intcarry3[0] = 0;
+  
+
+  genvar z;
+  generate
+  for(z=0;z<=64;z=z+1) begin
+  
+	assign intC1[0][1] = 0;
+	assign intC1[0][2] = 0;
+	assign intC1[0][3] = 0;
+	assign intC1[0][4] = 0;
+	
+	assign intC2[0][1] = 0;
+	assign intC2[0][2] = 0;
+	
+	assign intC3[0] = 0;
+  end
+  endgenerate
+  
+  /*genvar ii;
+  generate
+    for(ii=1;ii<=64;ii=ii+1) begin
+    genvar k;
+      for(k=1; k<=3; k=k+1) begin
+        compressor_5_3 Comps1 (PartialES[ii][k*4],PartialES[ii][k*4+1],PartialES[ii][k*4+2],PartialES[ii][k*4+3],intcarry1[ii-1][k+1],intC1[ii][k+1],intcarry1[ii][k+1],intS1[ii][k+1]);//YOU WERE RIGHT THE FIRST TIME YOU DUMB SHIT
+      end
+      for(k=0; k<=1; k=k+1) begin
+        compressor_5_3 Comps2 (intS1[ii][k*1],intC1[ii-1][k*1],intS1[ii][k*1+1],intC1[ii-1][k*1+1],intcarry2[ii-1][k+1],intC2[ii][k+1],intcarry2[ii][k+1],intS2[ii][k+1]);//AAAAAAAAAAAAAAAAAAAA FIX THE FUCKIN CARRIES YOU SHITHEAD
+      end
+      compressor_5_3 Comp3 (intS2[ii][1],intC2[ii-1],intS2[ii][2],intC2[ii-1][2],intcarry3[ii-1],intC3[ii],intS3[ii]);
+      
+	  full_adder finals (intS3[ii],intC3[ii-1],PartialES[ii][16],Treesum[ii],Treecarry[ii]);
+    end
+  endgenerate*/
+  
+  wire [32:1] runningsumLSB [16:0];
+  wire [64:33] runningsumMSB [16:0];
+  wire midcarry [16:0];
+  wire cout [16:0];
+  assign runningsumLSB[0] = PartialES[0][32:1];
+  assign runningsumMSB[0] = PartialES[0][64:33];
+ // n_bit_pg_Kogge_Stone_A Pre (PartialES[row][32:1],runningsumLSB[row-1],1'b0,runningsumLSB[row],midcarry[row]);
+  genvar row;
+  generate
+  for(row=1;row<=16;row=row+1) begin
+	n_bit_pg_Kogge_Stone_A A (PartialES[row][32:1],runningsumLSB[row-1],1'b0,runningsumLSB[row],midcarry[row]);
+	n_bit_pg_Kogge_Stone_A B (PartialES[row][64:33],runningsumMSB[row-1],midcarry[row],runningsumMSB[row],cout[row]);
+	end
+  endgenerate
+  
+  
+  assign P = {runningsumMSB[16],runningsumLSB[16]};
+  
+  /*wire midcarry; //carry between two final KS adders
+  wire NC[1:0];
+  n_bit_pg_Kogge_Stone_A A1 (Treesum[32:1],Treecarry[32:1],1'b0,P[32:1],midcarry);
+  n_bit_pg_Kogge_Stone_A A2 (Treesum[64:33],Treecarry[64:33],midcarry,P[64:33],O);az*/
+  
+endmodule
+
+module full_adder
+	// From pg. 440,
+	// 	A = G(i:k)
+	// 	B = G(k-1:j)
+	// 	Cin = P(i:k)
+	// 	gOut = G(i:j)
+	(input logic A, B, Cin, 
+	 output logic Cout, S);
+
+	wire w, w2, w3;
+	assign w = A ^ B;
+	assign S = Cin ^ w;
+	assign w2 = A & B;
+	assign w3 = w & Cin;
+	assign Cout = w2 | w3;
+endmodule
+
+module compressor_5_3 //see diagram in report/gitHub
+
+  #(parameter N = 32)
+
+  (input logic A, B, C, D, Cin, 
+   output logic Cout, intCout, S); //intermediare carry, carry, sum
+  
+  wire i1,i2,x1,x2;
+  
+  xnorish xn1 (A,B,i1,x1);
+  xnorish xn2 (C,D,i2,x2);
+  
+  wire o1,o2,na1;
+  
+  assign o1 = i1 | i2;
+  assign o2 = x1 | x2;
+  
+  assign na1 = ~&{o1,o2};
+  
+  wire xo1,a1;
+  
+  assign xo1 = x1 ^ x2;
+  
+  assign a1 = xo1 & Cin;
+  
+  assign intCout =  ~& {i1,i2};
+  assign Cout = a1 | na1;
+  assign S =  xo1 ^ Cin;
+    
+endmodule
+
+module xnorish
+  (input logic A,B,
+   output logic I,O);
+  
+  wire w;
+  assign I = ~& {A,B};
+  assign w = A | B;
+  assign O = ~& {I,w};
+  
+endmodule
+
+module	rad4_booth_encoder 
+	// From pg. 482,
+	// 	x3 = x(2i-1)
+	// 	x2 = x(2i)
+	// 	x1 = x(2i+1)
+	// 	si = SINGLE(i)
+	// 	di = DOUBLE(i)
+	// 	ni = NEGATIVE(i)
+	(input logic x3, x2, x1,
+	 output logic si, di, ni);
+
+	wire w1, w2, w3, w4, w5;
+
+	assign si = x3 ^ x2;
+	assign w1 = ~x1;
+	assign w2 = ~x3;
+	assign w3 = ~x2;
+	assign w4 = ~(x3 & x2 & w1);
+	assign w5 = ~(w2 & w3 & x1);
+	assign di = ~w4 | ~w5;
+	assign ni = x1;
+endmodule
+
+module booth_selector
+
+  #(parameter N = 32)
+
+   (output logic [N:0] PPi,	// output is 33 bits  
+    input logic [(N-1):0] Y,	// input is 32 bits
+    input logic Single,		// These are from the encoder
+    input logic Double,
+    input logic Negative);
+
+    wire [N:0] newWord, w2, w3, w4, w5;
+    
+    //assign monitorShift = w2;
+    //assign monitorSingle = {33{Single}};
+    assign newWord = {Y[N-1], Y};    
+    assign w2 = {Y, 1'b0};
+    assign w3 = {33{Double}} & w2;
+    assign w4 = {33{Single}} & newWord;
+    assign w5 = ~(w3 | w4);
+    assign PPi = {33{Negative}} ^ (~w5);
+endmodule
+
 
 // =================================== TEST BENCH =======================================================
 module test_calc; 						//test bench for calculator.
@@ -276,7 +528,7 @@ module test_calc; 						//test bench for calculator.
    begin
 		select = 0; a = 10; b = 30;
 	#2 select = 1; a = 10; b = 30; 
-	#2 select = 2; a = 0; b = 0;
+	#2 select = 2; a = 9; b = 32'hFFFFFFF7;
 	#2 select = 3; a = 30; b = 10;
 	#2 $finish;
    end

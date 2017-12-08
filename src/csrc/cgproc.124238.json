@@ -1,0 +1,47 @@
+{
+    "Modules": {
+        "...MASTER...": {},
+        "std": {
+            "Compiled": "Yes",
+            "Compiled Times": 112
+        },
+        "test_mux": {
+            "Compiled": "Yes",
+            "Compiled Times": 1
+        }
+    },
+    "CompUnits": {
+        "amcQw_d": {
+            "mod": "...MASTER...",
+            "out": "objs/amcQw_d.o",
+            "bytes": 7568,
+            "mode": 4,
+            "checksum": 0
+        },
+        "HztWI_d": {
+            "archive": "archive.123/_124238_archive_1.a",
+            "mod": "test_mux",
+            "out": "HztWI_d.o",
+            "bytes": 17425,
+            "mode": 4,
+            "checksum": 0
+        }
+    },
+    "reusePaths": {
+        "reYIK_d": {
+            "icPath": "csrc"
+        }
+    },
+    "ObjArchives": [
+        {
+            "objects": [
+                [
+                    "HztWI_d.o",
+                    17425
+                ]
+            ],
+            "archive": "archive.123/_124238_archive_1.a",
+            "size": 17425
+        }
+    ]
+}

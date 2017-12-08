@@ -1,0 +1,159 @@
+{
+    "Modules": {
+        "...MASTER...": {},
+        "booth_selector": {
+            "Compiled Times": 1,
+            "Compiled": "Yes"
+        },
+        "std": {
+            "Compiled Times": 112,
+            "Compiled": "Yes"
+        },
+        "v2_gray_cell": {
+            "Compiled Times": 15,
+            "Compiled": "Yes"
+        },
+        "test": {
+            "Compiled Times": 111,
+            "Compiled": "Yes"
+        },
+        "compressor_5_3": {
+            "Compiled Times": 1,
+            "Compiled": "Yes"
+        },
+        "n_bit_pg_Kogge_Stone_A": {
+            "Compiled Times": 1,
+            "Compiled": "Yes"
+        },
+        "full_adder": {
+            "Compiled Times": 1,
+            "Compiled": "Yes"
+        },
+        "rad4_booth_encoder": {
+            "Compiled Times": 1,
+            "Compiled": "Yes"
+        },
+        "v2_black_cell": {
+            "Compiled Times": 15,
+            "Compiled": "Yes"
+        }
+    },
+    "CompUnits": {
+        "amcQw_d": {
+            "bytes": 9242,
+            "mod": "...MASTER...",
+            "out": "objs/amcQw_d.o",
+            "mode": 4,
+            "checksum": 0
+        },
+        "BEdzp_d": {
+            "bytes": 10358,
+            "mod": "full_adder",
+            "out": "BEdzp_d.o",
+            "mode": 4,
+            "checksum": 0,
+            "archive": "archive.133/_153654_archive_1.a"
+        },
+        "GxQnj_d": {
+            "bytes": 20315,
+            "mod": "compressor_5_3",
+            "out": "GxQnj_d.o",
+            "mode": 4,
+            "checksum": 0,
+            "archive": "archive.133/_153654_archive_1.a"
+        },
+        "t2G2s_d": {
+            "bytes": 8817,
+            "mod": "v2_black_cell",
+            "out": "t2G2s_d.o",
+            "mode": 4,
+            "checksum": 0,
+            "archive": "archive.133/_153654_archive_1.a"
+        },
+        "GF7wc_d": {
+            "bytes": 11693,
+            "mod": "rad4_booth_encoder",
+            "out": "GF7wc_d.o",
+            "mode": 4,
+            "checksum": 0,
+            "archive": "archive.133/_153654_archive_1.a"
+        },
+        "ARzJe_d": {
+            "bytes": 14248,
+            "mod": "booth_selector",
+            "out": "ARzJe_d.o",
+            "mode": 4,
+            "checksum": 0,
+            "archive": "archive.133/_153654_archive_1.a"
+        },
+        "YfF4e_d": {
+            "bytes": 89719,
+            "mod": "n_bit_pg_Kogge_Stone_A",
+            "out": "YfF4e_d.o",
+            "mode": 4,
+            "checksum": 0,
+            "archive": "archive.133/_153654_archive_1.a"
+        },
+        "HrFPj_d": {
+            "bytes": 8263,
+            "mod": "v2_gray_cell",
+            "out": "HrFPj_d.o",
+            "mode": 4,
+            "checksum": 0,
+            "archive": "archive.133/_153654_archive_1.a"
+        },
+        "x9Hvb_d": {
+            "bytes": 190104,
+            "mod": "test",
+            "out": "x9Hvb_d.o",
+            "mode": 4,
+            "checksum": 0,
+            "archive": "archive.133/_153654_archive_1.a"
+        }
+    },
+    "ObjArchives": [
+        {
+            "size": 353517,
+            "archive": "archive.133/_153654_archive_1.a",
+            "objects": [
+                [
+                    "BEdzp_d.o",
+                    10358
+                ],
+                [
+                    "GxQnj_d.o",
+                    20315
+                ],
+                [
+                    "GF7wc_d.o",
+                    11693
+                ],
+                [
+                    "ARzJe_d.o",
+                    14248
+                ],
+                [
+                    "YfF4e_d.o",
+                    89719
+                ],
+                [
+                    "HrFPj_d.o",
+                    8263
+                ],
+                [
+                    "t2G2s_d.o",
+                    8817
+                ],
+                [
+                    "x9Hvb_d.o",
+                    190104
+                ]
+            ]
+        }
+    ],
+    "reusePaths": {
+        "reYIK_d": {
+            "icPath": "csrc"
+        }
+    }
+}

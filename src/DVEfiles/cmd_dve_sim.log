@@ -9,9 +9,9 @@ synopsys::dump -autoflush on -fid VPD0
 set ::dve_fid VPD0
 synUtils::setDVEInitPhase 0
 ucliCore::getToolPID
-synUtils::sendTool -active _icl_setToolSocket /tmp/smlnpeIig7j
-synUtils::sendTool -active {_icl_start_rpc -version "L-2016.06-1_Full64" -sync_file /tmp/vcs_dve_rpc.jhazel.27534}
-synUtils::sendTool -active {_icl_createSharedMemory /tmp/vcs_dve_general.jhazel.27534}
+synUtils::sendTool -active _icl_setToolSocket /tmp/smlnpXGbur9
+synUtils::sendTool -active {_icl_start_rpc -version "L-2016.06-1_Full64" -sync_file /tmp/vcs_dve_rpc.jhazel.7988}
+synUtils::sendTool -active {_icl_createSharedMemory /tmp/vcs_dve_general.jhazel.7988}
 config endofsim noexit
 config onfail enable all
 config syscaddplainmembers
@@ -24,9 +24,13 @@ set ucliGUI::state
 set ucliGUI::state
 set ucliGUI::state
 set ucliGUI::state
-ucliGUI::getSignalValues -scope test -radix {decimal } -list {{B[32:1]} }
-ucliGUI::getSignalValues -scope test -radix {decimal } -list {{S[32:1]} }
-ucliGUI::getSignalValues -scope test -radix {decimal } -list {{A[32:1]} }
-ucliGUI::getSignalValues -scope test -radix {decimal } -list {{A[32:1]} }
-ucliGUI::getSignalValues -scope test -radix {decimal } -list {{B[32:1]} }
-ucliGUI::getSignalValues -scope test -radix {decimal } -list {{S[32:1]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{Y[16:0]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{cins[7:1]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{icins[7:1]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{couts[7:1]} }
+ucliGUI::getSignalValues -scope test -radix {binary } -list {{icouts[7:1]} }
+if [catch {gui_sim_terminate}] {gui_sim_terminate -kill}
+synopsys::finish
+set ucliGUI::state
+set ucliGUI::state
+ucli_exit

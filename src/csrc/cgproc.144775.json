@@ -1,0 +1,159 @@
+{
+    "Modules": {
+        "...MASTER...": {},
+        "rad4_booth_encoder": {
+            "Compiled Times": 1,
+            "Compiled": "Yes"
+        },
+        "n_bit_pg_Kogge_Stone_A": {
+            "Compiled Times": 1,
+            "Compiled": "Yes"
+        },
+        "std": {
+            "Compiled Times": 112,
+            "Compiled": "Yes"
+        },
+        "full_adder": {
+            "Compiled Times": 1,
+            "Compiled": "Yes"
+        },
+        "booth_selector": {
+            "Compiled Times": 1,
+            "Compiled": "Yes"
+        },
+        "compressor_5_3": {
+            "Compiled Times": 1,
+            "Compiled": "Yes"
+        },
+        "v2_black_cell": {
+            "Compiled Times": 15,
+            "Compiled": "Yes"
+        },
+        "v2_gray_cell": {
+            "Compiled Times": 15,
+            "Compiled": "Yes"
+        },
+        "test": {
+            "Compiled Times": 111,
+            "Compiled": "Yes"
+        }
+    },
+    "CompUnits": {
+        "amcQw_d": {
+            "mod": "...MASTER...",
+            "out": "objs/amcQw_d.o",
+            "bytes": 9242,
+            "checksum": 0,
+            "mode": 4
+        },
+        "YfF4e_d": {
+            "mod": "n_bit_pg_Kogge_Stone_A",
+            "out": "YfF4e_d.o",
+            "bytes": 89719,
+            "checksum": 0,
+            "mode": 4,
+            "archive": "archive.128/_144775_archive_1.a"
+        },
+        "BEdzp_d": {
+            "mod": "full_adder",
+            "out": "BEdzp_d.o",
+            "bytes": 10358,
+            "checksum": 0,
+            "mode": 4,
+            "archive": "archive.128/_144775_archive_1.a"
+        },
+        "x9Hvb_d": {
+            "mod": "test",
+            "out": "x9Hvb_d.o",
+            "bytes": 199157,
+            "checksum": 0,
+            "mode": 4,
+            "archive": "archive.128/_144775_archive_1.a"
+        },
+        "GxQnj_d": {
+            "mod": "compressor_5_3",
+            "out": "GxQnj_d.o",
+            "bytes": 20315,
+            "checksum": 0,
+            "mode": 4,
+            "archive": "archive.128/_144775_archive_1.a"
+        },
+        "t2G2s_d": {
+            "mod": "v2_black_cell",
+            "out": "t2G2s_d.o",
+            "bytes": 8817,
+            "checksum": 0,
+            "mode": 4,
+            "archive": "archive.128/_144775_archive_1.a"
+        },
+        "GF7wc_d": {
+            "mod": "rad4_booth_encoder",
+            "out": "GF7wc_d.o",
+            "bytes": 11693,
+            "checksum": 0,
+            "mode": 4,
+            "archive": "archive.128/_144775_archive_1.a"
+        },
+        "ARzJe_d": {
+            "mod": "booth_selector",
+            "out": "ARzJe_d.o",
+            "bytes": 14248,
+            "checksum": 0,
+            "mode": 4,
+            "archive": "archive.128/_144775_archive_1.a"
+        },
+        "HrFPj_d": {
+            "mod": "v2_gray_cell",
+            "out": "HrFPj_d.o",
+            "bytes": 8263,
+            "checksum": 0,
+            "mode": 4,
+            "archive": "archive.128/_144775_archive_1.a"
+        }
+    },
+    "reusePaths": {
+        "reYIK_d": {
+            "icPath": "csrc"
+        }
+    },
+    "ObjArchives": [
+        {
+            "archive": "archive.128/_144775_archive_1.a",
+            "size": 362570,
+            "objects": [
+                [
+                    "BEdzp_d.o",
+                    10358
+                ],
+                [
+                    "GxQnj_d.o",
+                    20315
+                ],
+                [
+                    "GF7wc_d.o",
+                    11693
+                ],
+                [
+                    "ARzJe_d.o",
+                    14248
+                ],
+                [
+                    "YfF4e_d.o",
+                    89719
+                ],
+                [
+                    "HrFPj_d.o",
+                    8263
+                ],
+                [
+                    "t2G2s_d.o",
+                    8817
+                ],
+                [
+                    "x9Hvb_d.o",
+                    199157
+                ]
+            ]
+        }
+    ]
+}

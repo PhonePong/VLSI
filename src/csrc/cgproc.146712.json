@@ -1,0 +1,159 @@
+{
+    "ObjArchives": [
+        {
+            "archive": "archive.130/_146712_archive_1.a",
+            "size": 355159,
+            "objects": [
+                [
+                    "BEdzp_d.o",
+                    10358
+                ],
+                [
+                    "GxQnj_d.o",
+                    20315
+                ],
+                [
+                    "GF7wc_d.o",
+                    11693
+                ],
+                [
+                    "ARzJe_d.o",
+                    14248
+                ],
+                [
+                    "YfF4e_d.o",
+                    89719
+                ],
+                [
+                    "HrFPj_d.o",
+                    8263
+                ],
+                [
+                    "t2G2s_d.o",
+                    8817
+                ],
+                [
+                    "x9Hvb_d.o",
+                    191746
+                ]
+            ]
+        }
+    ],
+    "Modules": {
+        "...MASTER...": {},
+        "std": {
+            "Compiled": "Yes",
+            "Compiled Times": 112
+        },
+        "full_adder": {
+            "Compiled": "Yes",
+            "Compiled Times": 1
+        },
+        "test": {
+            "Compiled": "Yes",
+            "Compiled Times": 111
+        },
+        "compressor_5_3": {
+            "Compiled": "Yes",
+            "Compiled Times": 1
+        },
+        "rad4_booth_encoder": {
+            "Compiled": "Yes",
+            "Compiled Times": 1
+        },
+        "booth_selector": {
+            "Compiled": "Yes",
+            "Compiled Times": 1
+        },
+        "n_bit_pg_Kogge_Stone_A": {
+            "Compiled": "Yes",
+            "Compiled Times": 1
+        },
+        "v2_gray_cell": {
+            "Compiled": "Yes",
+            "Compiled Times": 15
+        },
+        "v2_black_cell": {
+            "Compiled": "Yes",
+            "Compiled Times": 15
+        }
+    },
+    "CompUnits": {
+        "HrFPj_d": {
+            "mode": 4,
+            "mod": "v2_gray_cell",
+            "out": "HrFPj_d.o",
+            "archive": "archive.130/_146712_archive_1.a",
+            "bytes": 8263,
+            "checksum": 0
+        },
+        "amcQw_d": {
+            "mode": 4,
+            "mod": "...MASTER...",
+            "out": "objs/amcQw_d.o",
+            "bytes": 9242,
+            "checksum": 0
+        },
+        "BEdzp_d": {
+            "mode": 4,
+            "mod": "full_adder",
+            "out": "BEdzp_d.o",
+            "archive": "archive.130/_146712_archive_1.a",
+            "bytes": 10358,
+            "checksum": 0
+        },
+        "GxQnj_d": {
+            "mode": 4,
+            "mod": "compressor_5_3",
+            "out": "GxQnj_d.o",
+            "archive": "archive.130/_146712_archive_1.a",
+            "bytes": 20315,
+            "checksum": 0
+        },
+        "YfF4e_d": {
+            "mode": 4,
+            "mod": "n_bit_pg_Kogge_Stone_A",
+            "out": "YfF4e_d.o",
+            "archive": "archive.130/_146712_archive_1.a",
+            "bytes": 89719,
+            "checksum": 0
+        },
+        "GF7wc_d": {
+            "mode": 4,
+            "mod": "rad4_booth_encoder",
+            "out": "GF7wc_d.o",
+            "archive": "archive.130/_146712_archive_1.a",
+            "bytes": 11693,
+            "checksum": 0
+        },
+        "ARzJe_d": {
+            "mode": 4,
+            "mod": "booth_selector",
+            "out": "ARzJe_d.o",
+            "archive": "archive.130/_146712_archive_1.a",
+            "bytes": 14248,
+            "checksum": 0
+        },
+        "t2G2s_d": {
+            "mode": 4,
+            "mod": "v2_black_cell",
+            "out": "t2G2s_d.o",
+            "archive": "archive.130/_146712_archive_1.a",
+            "bytes": 8817,
+            "checksum": 0
+        },
+        "x9Hvb_d": {
+            "mode": 4,
+            "mod": "test",
+            "out": "x9Hvb_d.o",
+            "archive": "archive.130/_146712_archive_1.a",
+            "bytes": 191746,
+            "checksum": 0
+        }
+    },
+    "reusePaths": {
+        "reYIK_d": {
+            "icPath": "csrc"
+        }
+    }
+}

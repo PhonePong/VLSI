@@ -1,0 +1,63 @@
+{
+    "Modules": {
+        "test": {
+            "Compiled": "Yes",
+            "Compiled Times": 111
+        },
+        "...MASTER...": {},
+        "std": {
+            "Compiled": "Yes",
+            "Compiled Times": 112
+        },
+        "compressor_5_3": {
+            "Compiled": "Yes",
+            "Compiled Times": 1
+        }
+    },
+    "CompUnits": {
+        "amcQw_d": {
+            "mod": "...MASTER...",
+            "checksum": 0,
+            "out": "objs/amcQw_d.o",
+            "bytes": 7560,
+            "mode": 4
+        },
+        "GxQnj_d": {
+            "mod": "compressor_5_3",
+            "checksum": 0,
+            "out": "GxQnj_d.o",
+            "bytes": 19387,
+            "mode": 4,
+            "archive": "archive.112/_27291_archive_1.a"
+        },
+        "x9Hvb_d": {
+            "mod": "test",
+            "checksum": 0,
+            "out": "x9Hvb_d.o",
+            "bytes": 27704,
+            "mode": 4,
+            "archive": "archive.112/_27291_archive_1.a"
+        }
+    },
+    "reusePaths": {
+        "reYIK_d": {
+            "icPath": "csrc"
+        }
+    },
+    "ObjArchives": [
+        {
+            "size": 47091,
+            "archive": "archive.112/_27291_archive_1.a",
+            "objects": [
+                [
+                    "GxQnj_d.o",
+                    19387
+                ],
+                [
+                    "x9Hvb_d.o",
+                    27704
+                ]
+            ]
+        }
+    ]
+}

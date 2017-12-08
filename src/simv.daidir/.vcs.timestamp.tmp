@@ -30,7 +30,7 @@
 -picarchive
 -sverilog
 -ucli
-../src/N_Bit_Kogg_Stone_Subtractor.v
+../src/compressor_test.v
 /usr/local/synopsys-Fall2016/vcs/linux64/bin/vcs1
 61
 sysc_uni_pwd=/home/jhazel/ASIC_Design/src
@@ -96,7 +96,7 @@ BASH_FUNC_module()=() {  eval `/usr/bin/modulecmd bash $*`_}
 ARCHPRO_ROOT=/usr/local/synopsys-Fall2016/mvtools
 0
 2
-1512644417 ../src/N_Bit_Kogg_Stone_Subtractor.v
+1512697900 ../src/compressor_test.v
 1468724709 /usr/local/synopsys-Fall2016/vcs/linux64/lib/vcsdp.tab
 4
 0 

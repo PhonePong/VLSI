@@ -1,0 +1,207 @@
+{
+    "ObjArchives": [
+        {
+            "archive": "archive.147/_182296_archive_1.a",
+            "objects": [
+                [
+                    "RZvU4_d.o",
+                    11792
+                ],
+                [
+                    "YfF4e_d.o",
+                    16823
+                ],
+                [
+                    "VUi1s_d.o",
+                    80601
+                ],
+                [
+                    "HrFPj_d.o",
+                    8271
+                ],
+                [
+                    "t2G2s_d.o",
+                    8825
+                ],
+                [
+                    "a2sr0_d.o",
+                    12141
+                ],
+                [
+                    "BEdzp_d.o",
+                    10366
+                ],
+                [
+                    "GxQnj_d.o",
+                    20323
+                ],
+                [
+                    "GF7wc_d.o",
+                    11701
+                ],
+                [
+                    "ARzJe_d.o",
+                    14543
+                ],
+                [
+                    "MHKQQ_d.o",
+                    185936
+                ]
+            ],
+            "size": 381322
+        }
+    ],
+    "reusePaths": {
+        "reYIK_d": {
+            "icPath": "csrc"
+        }
+    },
+    "Modules": {
+        "...MASTER...": {},
+        "divide": {
+            "Compiled": "Yes",
+            "Compiled Times": 1
+        },
+        "v2_gray_cell": {
+            "Compiled": "Yes",
+            "Compiled Times": 15
+        },
+        "booth_selector": {
+            "Compiled": "Yes",
+            "Compiled Times": 1
+        },
+        "std": {
+            "Compiled": "Yes",
+            "Compiled Times": 112
+        },
+        "rad4_booth_encoder": {
+            "Compiled": "Yes",
+            "Compiled Times": 1
+        },
+        "mux": {
+            "Compiled": "Yes",
+            "Compiled Times": 1
+        },
+        "n_bit_pg_Kogge_Stone_A": {
+            "Compiled": "Yes",
+            "Compiled Times": 1
+        },
+        "N_Bit_Group_PG_0000": {
+            "Compiled": "Yes",
+            "Compiled Times": 1
+        },
+        "v2_black_cell": {
+            "Compiled": "Yes",
+            "Compiled Times": 15
+        },
+        "full_adder": {
+            "Compiled": "Yes",
+            "Compiled Times": 1
+        },
+        "compressor_5_3": {
+            "Compiled": "Yes",
+            "Compiled Times": 1
+        },
+        "test_calc": {
+            "Compiled": "Yes",
+            "Compiled Times": 1
+        }
+    },
+    "CompUnits": {
+        "VUi1s_d": {
+            "mod": "N_Bit_Group_PG_0000",
+            "out": "VUi1s_d.o",
+            "bytes": 80601,
+            "archive": "archive.147/_182296_archive_1.a",
+            "mode": 4,
+            "checksum": 0
+        },
+        "amcQw_d": {
+            "mod": "...MASTER...",
+            "out": "objs/amcQw_d.o",
+            "bytes": 9250,
+            "mode": 4,
+            "checksum": 0
+        },
+        "GF7wc_d": {
+            "mod": "rad4_booth_encoder",
+            "out": "GF7wc_d.o",
+            "bytes": 11701,
+            "archive": "archive.147/_182296_archive_1.a",
+            "mode": 4,
+            "checksum": 0
+        },
+        "RZvU4_d": {
+            "mod": "mux",
+            "out": "RZvU4_d.o",
+            "bytes": 11792,
+            "archive": "archive.147/_182296_archive_1.a",
+            "mode": 4,
+            "checksum": 0
+        },
+        "a2sr0_d": {
+            "mod": "divide",
+            "out": "a2sr0_d.o",
+            "bytes": 12141,
+            "archive": "archive.147/_182296_archive_1.a",
+            "mode": 4,
+            "checksum": 0
+        },
+        "YfF4e_d": {
+            "mod": "n_bit_pg_Kogge_Stone_A",
+            "out": "YfF4e_d.o",
+            "bytes": 16823,
+            "archive": "archive.147/_182296_archive_1.a",
+            "mode": 4,
+            "checksum": 0
+        },
+        "HrFPj_d": {
+            "mod": "v2_gray_cell",
+            "out": "HrFPj_d.o",
+            "bytes": 8271,
+            "archive": "archive.147/_182296_archive_1.a",
+            "mode": 4,
+            "checksum": 0
+        },
+        "BEdzp_d": {
+            "mod": "full_adder",
+            "out": "BEdzp_d.o",
+            "bytes": 10366,
+            "archive": "archive.147/_182296_archive_1.a",
+            "mode": 4,
+            "checksum": 0
+        },
+        "t2G2s_d": {
+            "mod": "v2_black_cell",
+            "out": "t2G2s_d.o",
+            "bytes": 8825,
+            "archive": "archive.147/_182296_archive_1.a",
+            "mode": 4,
+            "checksum": 0
+        },
+        "GxQnj_d": {
+            "mod": "compressor_5_3",
+            "out": "GxQnj_d.o",
+            "bytes": 20323,
+            "archive": "archive.147/_182296_archive_1.a",
+            "mode": 4,
+            "checksum": 0
+        },
+        "ARzJe_d": {
+            "mod": "booth_selector",
+            "out": "ARzJe_d.o",
+            "bytes": 14543,
+            "archive": "archive.147/_182296_archive_1.a",
+            "mode": 4,
+            "checksum": 0
+        },
+        "MHKQQ_d": {
+            "mod": "test_calc",
+            "out": "MHKQQ_d.o",
+            "bytes": 185936,
+            "archive": "archive.147/_182296_archive_1.a",
+            "mode": 4,
+            "checksum": 0
+        }
+    }
+}

@@ -1,20 +1,16 @@
-Warning : License for product VCSRuntime_Net(725) will expire within 25 days, on: 31-dec-2017.
+Warning : License for product VCSRuntime_Net(725) will expire within 24 days, on: 31-dec-2017.
 If you would like to temporarily disable this message, set 
  the VCS_LIC_EXPIRE_WARNING environment variable to the number of days
 before expiration that you want this message to start (the minimum is 0).
 Chronologic VCS simulator copyright 1991-2016
 Contains Synopsys proprietary information.
-Compiler version L-2016.06-1_Full64; Runtime version L-2016.06-1_Full64;  Dec  7 06:00 2017
+Compiler version L-2016.06-1_Full64; Runtime version L-2016.06-1_Full64;  Dec  8 04:35 2017
 VCD+ Writer L-2016.06-1_Full64 Copyright (c) 1991-2016 by Synopsys Inc.
 The file '/home/jhazel/ASIC_Design/src/inter.vpd' was opened successfully.
-0
-1
-25
-1
-4294967246
-0
-4294967295
-1
-$finish called from file "../src/N_Bit_Kogg_Stone_Subtractor.v", line 172.
-$finish at simulation time                   14
-Simulation complete, time is 14.
+$finish called from file "../src/compressor_test.v", line 128.
+$finish at simulation time                 2008
+Simulation complete, time is 2008.
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 2008
+CPU Time:      0.100 seconds;       Data structure size:   0.0Mb
+Fri Dec  8 04:42:40 2017
